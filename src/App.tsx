@@ -113,26 +113,20 @@ export default function App() {
         {isLoading && (
           <motion.div
             key="loader"
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0F1115]"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#7A1C24]"
             initial={{ opacity: 1 }}
             exit={{
               opacity: 0,
-              scale: 1.1,
-              transition: { duration: 1, ease: [0.76, 0, 0.24, 1] }
+              scale: 1.05,
+              transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] }
             }}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full h-full flex items-center justify-center p-12 md:p-24"
+              transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full h-full"
             >
-              {/* Massive Logo Glow - constrained to borders */}
-              <div className="absolute inset-0 bg-[#7A1C24] blur-[140px] opacity-20 rounded-full scale-110"></div>
-
-              {/* Site Border Simulation during intro */}
-              <div className="absolute inset-6 md:inset-12 border border-white/5 pointer-events-none rounded-[2rem]"></div>
-
               <img
                 src="/apex-labs-logo.png"
                 alt="Apex Labs logo"
