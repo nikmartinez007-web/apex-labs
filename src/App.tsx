@@ -122,17 +122,17 @@ export default function App() {
             }}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-              className="relative"
+              transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full h-full flex items-center justify-center p-0"
             >
-              {/* Massive Logo Glow */}
-              <div className="absolute inset-0 bg-[#7A1C24] blur-[120px] opacity-30 rounded-full scale-150"></div>
+              {/* Massive Logo Glow - filling workspace */}
+              <div className="absolute inset-0 bg-[#7A1C24] blur-[160px] opacity-25 rounded-full scale-125"></div>
               <img
                 src="/apex-labs-logo.png"
                 alt="Apex Labs logo"
-                className="h-48 md:h-64 lg:h-80 w-auto object-contain relative z-10"
+                className="w-full h-full object-contain md:object-cover relative z-10"
               />
             </motion.div>
           </motion.div>
