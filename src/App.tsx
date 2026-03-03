@@ -165,9 +165,12 @@ export default function App() {
               >
                 Apply for Partnership <ArrowRight size={18} />
               </a>
-              <button className="font-medium text-base bg-transparent text-[#E8E8E8] px-8 py-4 rounded-full flex items-center gap-2 hover:bg-white/5 transition-all border border-white/10">
+              <a
+                href="#results"
+                className="font-medium text-base bg-transparent text-[#E8E8E8] px-8 py-4 rounded-full flex items-center gap-2 hover:bg-white/5 transition-all border border-white/10"
+              >
                 View Case Studies
-              </button>
+              </a>
             </div>
           </motion.div>
         </section>
