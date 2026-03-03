@@ -39,11 +39,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* Right: Login */}
+          {/* Right: Empty to balance flex */}
           <div className="flex justify-end flex-1">
-            <button className="font-medium text-sm bg-[#0F1115] hover:bg-black text-[#E8E8E8] px-5 py-2.5 rounded-full transition-all border border-white/10">
-              Client Login
-            </button>
           </div>
 
         </div>
