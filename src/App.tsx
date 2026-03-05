@@ -109,6 +109,76 @@ function CaseStudyCard({ number, title, description, metrics }: {
   );
 }
 
+function BookingSection() {
+  useEffect(() => {
+    (function (C: any, A: string, L: string) {
+      let p = function (a: any, ar: any) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api: any = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window as any, "https://app.cal.eu/embed/embed.js", "init");
+
+    const Cal = (window as any).Cal;
+    if (Cal) {
+      Cal("init", "15min", { origin: "https://app.cal.eu" });
+
+      Cal.ns["15min"]("inline", {
+        elementOrSelector: "#my-cal-inline-15min",
+        config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true", "theme": "dark" },
+        calLink: "apex-labs-3oae39/15min",
+      });
+
+      Cal.ns["15min"]("ui", { "theme": "dark", "hideEventTypeDetails": false, "layout": "month_view" });
+    }
+  }, []);
+
+  return (
+    <section id="book" className="py-24 px-6 bg-[#0B0C10]/50 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#7A1C24] opacity-10 blur-[100px] rounded-full mix-blend-screen pointer-events-none"></div>
+
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="text-center mb-16">
+          <div className="font-bold text-xs text-[#C6A85A] mb-4 uppercase tracking-[0.3em]">Next Steps</div>
+          <h2 className="font-bold text-4xl md:text-6xl mb-6">
+            Book your <span className="text-[#7A1C24]">Strategy Call</span>
+          </h2>
+          <p className="font-normal text-lg text-[#8A8F98] max-w-2xl mx-auto leading-relaxed">
+            Choose a time that works for you to discuss your growth goals with our engineering team and explore how Apex Labs can scale your revenue.
+          </p>
+        </div>
+
+        <div className="bg-[#0F1115] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl min-h-[700px] relative group transition-all duration-500 hover:border-[#7A1C24]/30">
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(122,28,36,0.1),transparent)]"></div>
+          </div>
+          <div style={{ width: "100%", height: "100%", overflow: "scroll" }} id="my-cal-inline-15min" className="relative z-10"></div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -748,7 +818,10 @@ export default function App() {
             </div>
           </section>
 
+          <BookingSection />
+
           {/* CTA Section */}
+
           <section className="py-32 px-6">
             <div className="max-w-5xl mx-auto">
               <div className="bg-[#7A1C24] border-2 border-[#C6A85A] rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden shadow-[0_0_50px_rgba(198,168,90,0.15)]">
