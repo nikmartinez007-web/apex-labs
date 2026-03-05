@@ -144,13 +144,28 @@ function BookingSection() {
 
       Cal.ns["15min"]("inline", {
         elementOrSelector: "#my-cal-inline-15min",
-        config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true", "theme": "dark" },
+        config: {
+          "layout": "month_view",
+          "useSlotsViewOnSmallScreen": "true",
+          "theme": "dark",
+          "hideEventTypeDetails": "true"
+        },
         calLink: "apex-labs-3oae39/15min",
       });
 
-      Cal.ns["15min"]("ui", { "theme": "dark", "hideEventTypeDetails": false, "layout": "month_view" });
+      Cal.ns["15min"]("ui", {
+        "theme": "dark",
+        "hideEventTypeDetails": true,
+        "layout": "month_view",
+        "styles": {
+          "branding": {
+            "hideBranding": true
+          }
+        }
+      });
     }
   }, []);
+
 
   return (
     <section id="book" className="py-24 px-6 bg-[#0B0C10]/50 relative overflow-hidden">
@@ -168,11 +183,11 @@ function BookingSection() {
           </p>
         </div>
 
-        <div className="bg-[#0F1115] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl min-h-[700px] relative group transition-all duration-500 hover:border-[#7A1C24]/30">
+        <div className="bg-[#0F1115] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl min-h-[700px] md:h-[750px] relative group transition-all duration-500 hover:border-[#7A1C24]/30">
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(122,28,36,0.1),transparent)]"></div>
           </div>
-          <div style={{ width: "100%", height: "100%", overflow: "scroll" }} id="my-cal-inline-15min" className="relative z-10"></div>
+          <div id="my-cal-inline-15min" className="w-full h-full relative z-10"></div>
         </div>
       </div>
     </section>
