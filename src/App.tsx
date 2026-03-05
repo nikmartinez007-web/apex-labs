@@ -41,7 +41,10 @@ function CaseStudyCard({ number, title, description, metrics }: {
       >
         <motion.div
           className="relative w-full h-full preserve-3d"
-          style={{ willChange: 'transform' }}
+          style={{
+            willChange: 'transform',
+            transformStyle: 'preserve-3d'
+          }}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{
             type: "spring",
@@ -51,7 +54,10 @@ function CaseStudyCard({ number, title, description, metrics }: {
           }}
         >
           {/* Front Face (Hidden State) */}
-          <div className="absolute inset-0 backface-hidden bg-[#0F1115] border border-white/10 p-6 md:p-10 rounded-[2.5rem] flex flex-col items-center justify-center text-center overflow-hidden shadow-2xl">
+          <div
+            className="absolute inset-0 backface-hidden bg-[#0F1115] border border-white/10 p-6 md:p-10 rounded-[2.5rem] flex flex-col items-center justify-center text-center overflow-hidden shadow-2xl"
+            style={{ transform: 'translateZ(1px)' }}
+          >
 
             {/* Shine effect on front */}
             <div className="pointer-events-none absolute inset-0 opacity-40">
@@ -83,7 +89,11 @@ function CaseStudyCard({ number, title, description, metrics }: {
           </div>
 
           {/* Back Face (Actual Content) */}
-          <div className="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-gradient-to-br from-[#12141A] to-[#0F1115] border border-[#7A1C24]/30 p-6 md:p-10 rounded-[2.5rem] flex flex-col justify-center overflow-hidden shadow-[0_0_50px_rgba(122,28,36,0.2)]">
+          <div
+            className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#12141A] to-[#0F1115] border border-[#7A1C24]/30 p-6 md:p-10 rounded-[2.5rem] flex flex-col justify-center overflow-hidden shadow-[0_0_50px_rgba(122,28,36,0.2)]"
+            style={{ transform: 'rotateY(180deg) translateZ(1px)' }}
+          >
+
 
             {/* Shine effect on back */}
             <div className="pointer-events-none absolute inset-0 opacity-100">
@@ -189,11 +199,11 @@ function BookingSection() {
           </p>
         </div>
 
-        <div className="bg-[#0F1115] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl min-h-[700px] md:h-[750px] relative group transition-all duration-500 hover:border-[#7A1C24]/30">
+        <div className="bg-[#0F1115] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl min-h-[900px] md:min-h-[700px] md:h-[750px] relative group transition-all duration-500 hover:border-[#7A1C24]/30">
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(122,28,36,0.1),transparent)]"></div>
           </div>
-          <div id="my-cal-inline-15min" className="w-full h-full relative z-10"></div>
+          <div id="my-cal-inline-15min" className="w-full h-full relative z-10 min-h-[900px] md:min-h-0"></div>
         </div>
       </div>
     </section>
