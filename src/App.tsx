@@ -7,8 +7,108 @@ import {
   Target,
   Zap,
   BarChart3,
-  CheckCircle2
+  CheckCircle2,
+  Lock,
+  Eye
 } from 'lucide-react';
+
+function CaseStudyCard({ number, title, description, metrics }: {
+  number: string,
+  title: string,
+  description: string,
+  metrics: { value: string, label: string, isPrimary?: boolean }[]
+}) {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div
+      className="group h-[400px] w-full [perspective:2000px] relative cursor-pointer"
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <motion.div
+        className="w-full h-full"
+        animate={{
+          y: [0, -10, 0],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <motion.div
+          className="relative w-full h-full preserve-3d"
+          style={{ willChange: 'transform' }}
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 80,
+            damping: 20,
+            mass: 1
+          }}
+        >
+          {/* Front Face (Hidden State) */}
+          <div className="absolute inset-0 backface-hidden bg-[#0F1115] border border-white/10 p-10 rounded-[2.5rem] flex flex-col items-center justify-center text-center overflow-hidden shadow-2xl">
+            {/* Shine effect on front */}
+            <div className="pointer-events-none absolute inset-0 opacity-40">
+              <div className={`absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform transition-transform duration-1000 ease-in-out ${isFlipped ? 'translate-x-[400%]' : '-translate-x-full'}`}></div>
+            </div>
+
+
+            <div className="font-bold text-xs text-[#C6A85A] mb-8 uppercase tracking-[0.3em] opacity-80">{number}</div>
+
+            <div className="relative mb-8">
+              <div className="absolute inset-0 bg-[#7A1C24] blur-[40px] opacity-20 animate-pulse"></div>
+              <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#1A1D25] to-[#0F1115] border border-white/5 flex items-center justify-center relative z-10">
+                <Lock size={32} className="text-[#7A1C24]/80" />
+              </div>
+            </div>
+
+            <h3 className="font-semibold text-xl text-[#E8E8E8] mb-2">Internal Performance Data</h3>
+            <p className="font-medium text-xs text-[#8A8F98] uppercase tracking-widest flex items-center gap-2 opacity-60">
+              <Eye size={14} /> Hover to unlock access
+            </p>
+
+            <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end opacity-20">
+              <div className="h-16 w-1 bg-gradient-to-t from-[#7A1C24] to-transparent rounded-full"></div>
+              <div className="h-10 w-1 bg-gradient-to-t from-[#C6A85A] to-transparent rounded-full"></div>
+              <div className="h-20 w-1 bg-gradient-to-t from-[#7A1C24] to-transparent rounded-full"></div>
+              <div className="h-12 w-1 bg-gradient-to-t from-[#C6A85A] to-transparent rounded-full"></div>
+            </div>
+          </div>
+
+          {/* Back Face (Actual Content) */}
+          <div className="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-gradient-to-br from-[#12141A] to-[#0F1115] border border-[#7A1C24]/30 p-10 rounded-[2.5rem] flex flex-col justify-center overflow-hidden shadow-[0_0_50px_rgba(122,28,36,0.2)]">
+            {/* Shine effect on back */}
+            <div className="pointer-events-none absolute inset-0 opacity-100">
+              <div className={`absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent -skew-x-12 transform transition-transform duration-1000 ease-in-out ${isFlipped ? 'translate-x-[400%]' : '-translate-x-full'}`}></div>
+            </div>
+
+
+            <div className="font-bold text-xs text-[#C6A85A] mb-4 uppercase tracking-[0.3em]">{number}</div>
+            <h3 className="font-bold text-3xl mb-4 text-white leading-tight">{title}</h3>
+            <p className="font-normal text-[#8A8F98] mb-10 leading-relaxed text-lg">{description}</p>
+
+            <div className="flex flex-wrap items-center gap-4 mt-auto">
+              {metrics.map((m, i) => (
+                <div
+                  key={i}
+                  className={`${m.isPrimary ? 'bg-[#7A1C24]/20 border border-[#7A1C24]/30' : 'bg-white/5 border border-white/5'} px-6 py-4 rounded-2xl flex flex-col gap-1`}
+                >
+                  <span className={`font-bold ${m.isPrimary ? 'text-2xl text-[#E8E8E8]' : 'text-xl text-[#E8E8E8]'}`}>{m.value}</span>
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-[#C6A85A] font-semibold">{m.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
 
 export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -383,31 +483,26 @@ export default function App() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-[#0F1115] border border-white/10 p-10 rounded-3xl relative overflow-hidden group">
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/12 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
-                  </div>
-                  <div className="font-medium text-sm text-[#C6A85A] mb-4 uppercase tracking-widest">Case Study 01</div>
-                  <h3 className="font-semibold text-2xl mb-4">Global SaaS Platform</h3>
-                  <p className="font-normal text-[#8A8F98] mb-8">Scaled monthly recurring revenue by restructuring their paid acquisition funnel and implementing aggressive CRO.</p>
-                  <div className="flex items-center gap-4">
-                    <div className="bg-[#7A1C24]/20 text-[#7A1C24] px-4 py-2 rounded-lg font-bold text-xl">+450% MRR</div>
-                    <div className="bg-white/5 text-[#E8E8E8] px-4 py-2 rounded-lg font-medium text-sm">-40% CAC</div>
-                  </div>
-                </div>
-                <div className="bg-[#0F1115] border border-white/10 p-10 rounded-3xl relative overflow-hidden group">
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/12 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
-                  </div>
-                  <div className="font-medium text-sm text-[#C6A85A] mb-4 uppercase tracking-widest">Case Study 02</div>
-                  <h3 className="font-semibold text-2xl mb-4">DTC E-Commerce</h3>
-                  <p className="font-normal text-[#8A8F98] mb-8">Broke through a 6-month growth plateau by deploying our creative testing framework and rebuilding their data architecture.</p>
-                  <div className="flex items-center gap-4">
-                    <div className="bg-[#7A1C24]/20 text-[#7A1C24] px-4 py-2 rounded-lg font-bold text-xl">$2.4M/mo</div>
-                    <div className="bg-white/5 text-[#E8E8E8] px-4 py-2 rounded-lg font-medium text-sm">3.8x ROAS</div>
-                  </div>
-                </div>
+                <CaseStudyCard
+                  number="Case Study 01"
+                  title="Global SaaS Platform"
+                  description="Scaled monthly recurring revenue by restructuring their paid acquisition funnel and implementing aggressive CRO."
+                  metrics={[
+                    { value: "+450% MRR", label: "Growth", isPrimary: true },
+                    { value: "-40% CAC", label: "Efficiency" }
+                  ]}
+                />
+                <CaseStudyCard
+                  number="Case Study 02"
+                  title="DTC E-Commerce"
+                  description="Broke through a 6-month growth plateau by deploying our creative testing framework and rebuilding their data architecture."
+                  metrics={[
+                    { value: "$2.4M/mo", label: "Revenue", isPrimary: true },
+                    { value: "3.8x ROAS", label: "Ad Spend" }
+                  ]}
+                />
               </div>
+
             </div>
           </section>
 

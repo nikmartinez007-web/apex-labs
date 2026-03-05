@@ -31,3 +31,14 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #7A1C24;
 }
+
+/* 3D Flip Helpers */
+.backface-hidden {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
