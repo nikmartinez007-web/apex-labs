@@ -22,11 +22,12 @@ function CaseStudyCard({ number, title, description, metrics }: {
 
   return (
     <div
-      className="group h-[400px] w-full [perspective:2000px] relative cursor-pointer"
+      className="group h-[450px] md:h-[400px] w-full [perspective:2000px] relative cursor-pointer"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
       onClick={() => setIsFlipped(!isFlipped)}
     >
+
       <motion.div
         className="w-full h-full"
         animate={{
@@ -50,7 +51,8 @@ function CaseStudyCard({ number, title, description, metrics }: {
           }}
         >
           {/* Front Face (Hidden State) */}
-          <div className="absolute inset-0 backface-hidden bg-[#0F1115] border border-white/10 p-10 rounded-[2.5rem] flex flex-col items-center justify-center text-center overflow-hidden shadow-2xl">
+          <div className="absolute inset-0 backface-hidden bg-[#0F1115] border border-white/10 p-6 md:p-10 rounded-[2.5rem] flex flex-col items-center justify-center text-center overflow-hidden shadow-2xl">
+
             {/* Shine effect on front */}
             <div className="pointer-events-none absolute inset-0 opacity-40">
               <div className={`absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform transition-transform duration-1000 ease-in-out ${isFlipped ? 'translate-x-[400%]' : '-translate-x-full'}`}></div>
@@ -66,10 +68,11 @@ function CaseStudyCard({ number, title, description, metrics }: {
               </div>
             </div>
 
-            <h3 className="font-semibold text-xl text-[#E8E8E8] mb-2">Internal Performance Data</h3>
-            <p className="font-medium text-xs text-[#8A8F98] uppercase tracking-widest flex items-center gap-2 opacity-60">
-              <Eye size={14} /> Hover to unlock access
+            <h3 className="font-semibold text-lg md:text-xl text-[#E8E8E8] mb-2">Internal Performance Data</h3>
+            <p className="font-medium text-[10px] md:text-xs text-[#8A8F98] uppercase tracking-widest flex items-center gap-2 opacity-60">
+              <Eye size={12} className="md:w-[14px] md:h-[14px]" /> Hover to unlock access
             </p>
+
 
             <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end opacity-20">
               <div className="h-16 w-1 bg-gradient-to-t from-[#7A1C24] to-transparent rounded-full"></div>
@@ -80,26 +83,29 @@ function CaseStudyCard({ number, title, description, metrics }: {
           </div>
 
           {/* Back Face (Actual Content) */}
-          <div className="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-gradient-to-br from-[#12141A] to-[#0F1115] border border-[#7A1C24]/30 p-10 rounded-[2.5rem] flex flex-col justify-center overflow-hidden shadow-[0_0_50px_rgba(122,28,36,0.2)]">
+          <div className="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-gradient-to-br from-[#12141A] to-[#0F1115] border border-[#7A1C24]/30 p-6 md:p-10 rounded-[2.5rem] flex flex-col justify-center overflow-hidden shadow-[0_0_50px_rgba(122,28,36,0.2)]">
+
             {/* Shine effect on back */}
             <div className="pointer-events-none absolute inset-0 opacity-100">
               <div className={`absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent -skew-x-12 transform transition-transform duration-1000 ease-in-out ${isFlipped ? 'translate-x-[400%]' : '-translate-x-full'}`}></div>
             </div>
 
 
-            <div className="font-bold text-xs text-[#C6A85A] mb-4 uppercase tracking-[0.3em]">{number}</div>
-            <h3 className="font-bold text-3xl mb-4 text-white leading-tight">{title}</h3>
-            <p className="font-normal text-[#8A8F98] mb-10 leading-relaxed text-lg">{description}</p>
+            <div className="font-bold text-[10px] md:text-xs text-[#C6A85A] mb-2 md:mb-4 uppercase tracking-[0.3em]">{number}</div>
+            <h3 className="font-bold text-2xl md:text-3xl mb-2 md:mb-4 text-white leading-tight">{title}</h3>
+            <p className="font-normal text-[#8A8F98] mb-6 md:mb-10 leading-relaxed text-base md:text-lg">{description}</p>
+
 
             <div className="flex flex-wrap items-center gap-4 mt-auto">
               {metrics.map((m, i) => (
                 <div
                   key={i}
-                  className={`${m.isPrimary ? 'bg-[#7A1C24]/20 border border-[#7A1C24]/30' : 'bg-white/5 border border-white/5'} px-6 py-4 rounded-2xl flex flex-col gap-1`}
+                  className={`${m.isPrimary ? 'bg-[#7A1C24]/20 border border-[#7A1C24]/30' : 'bg-white/5 border border-white/5'} px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl flex flex-col gap-0.5 md:gap-1`}
                 >
-                  <span className={`font-bold ${m.isPrimary ? 'text-2xl text-[#E8E8E8]' : 'text-xl text-[#E8E8E8]'}`}>{m.value}</span>
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-[#C6A85A] font-semibold">{m.label}</span>
+                  <span className={`font-bold ${m.isPrimary ? 'text-xl md:text-2xl text-[#E8E8E8]' : 'text-lg md:text-xl text-[#E8E8E8]'}`}>{m.value}</span>
+                  <span className="text-[8px] md:text-[10px] uppercase tracking-[0.15em] text-[#C6A85A] font-semibold">{m.label}</span>
                 </div>
+
               ))}
             </div>
           </div>
