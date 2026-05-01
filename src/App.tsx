@@ -211,7 +211,35 @@ function BookingSection() {
 }
 
 
-function CookieConsent() {
+function PrivacyPolicyModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <div className="bg-[#0B1D2A] border border-white/10 w-full max-w-3xl rounded-3xl p-6 md:p-10 max-h-[85vh] overflow-y-auto shadow-2xl relative">
+        <button onClick={onClose} className="absolute top-6 right-6 text-[#A3B1C6] hover:text-white">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-white">Privacy Policy</h2>
+        <div className="space-y-4 text-sm text-[#A3B1C6] leading-relaxed">
+          <p><strong>Effective Date:</strong> {new Date().toLocaleDateString()}</p>
+          <p>This Privacy Policy explains how Apex Labs (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, uses, and discloses your information when you visit our website or use our services.</p>
+          <h3 className="text-white font-medium text-base mt-6 mb-2">1. Information We Collect</h3>
+          <p>We may collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and services, or when you contact us. This includes your name, email address, company details, ad spend figures, and other information related to your application.</p>
+          <h3 className="text-white font-medium text-base mt-6 mb-2">2. How We Use Your Information</h3>
+          <p>We use personal information collected via our website for a variety of business purposes, including evaluating your application, communicating with you, and optimizing our marketing campaigns.</p>
+          <h3 className="text-white font-medium text-base mt-6 mb-2">3. Cookies and Tracking Technologies</h3>
+          <p>We may use cookies and similar tracking technologies to access or store information. You can manage your cookie preferences through the banner provided on our website.</p>
+          <h3 className="text-white font-medium text-base mt-6 mb-2">4. Sharing Your Information</h3>
+          <p>We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations. We securely pass application data to our CRM for processing.</p>
+          <h3 className="text-white font-medium text-base mt-6 mb-2">5. Contact Us</h3>
+          <p>If you have questions or comments about this notice, you may email us at privacy@apex-labs.com.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CookieConsent({ openPrivacyPolicy }: { openPrivacyPolicy: () => void }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -238,7 +266,7 @@ function CookieConsent() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="text-sm text-[#A3B1C6] max-w-3xl">
           <strong className="text-[#FFFFFF] block mb-1">We value your privacy</strong>
-          We use strictly necessary cookies to make our site work. We and our partners also use cookies and similar technologies to understand how our site is used, personalize content, and deliver targeted advertising. By clicking &quot;Accept All&quot;, you consent to our use of these cookies. Please review our <a href="#" className="underline hover:text-[#FFFFFF]">Privacy Policy</a> to learn more about how we process your information.
+          We use strictly necessary cookies to make our site work. We and our partners also use cookies and similar technologies to understand how our site is used, personalize content, and deliver targeted advertising. By clicking &quot;Accept All&quot;, you consent to our use of these cookies. Please review our <button type="button" onClick={openPrivacyPolicy} className="underline hover:text-[#FFFFFF]">Privacy Policy</button> to learn more about how we process your information.
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
           <button onClick={decline} className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] px-4 py-2 transition-colors">
@@ -254,6 +282,7 @@ function CookieConsent() {
 }
 
 export default function App() {
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [isQualified, setIsQualified] = useState(false);
@@ -857,8 +886,8 @@ export default function App() {
                       className="mt-1 h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
                     />
                     <label htmlFor="accept-terms">
-                      I agree to be contacted by Apex Labs regarding this application and confirm I have read the
-                      privacy policy.
+                      I agree to be contacted by Apex Labs regarding this application and confirm I have read the{' '}
+                      <button type="button" onClick={() => setIsPrivacyModalOpen(true)} className="underline hover:text-[#FFFFFF]">privacy policy</button>.
                     </label>
                   </div>
 
@@ -979,7 +1008,7 @@ export default function App() {
               {/* Logo removed */}
             </div>
             <div className="flex gap-8">
-              <a href="#" className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Privacy Policy</a>
+              <button type="button" onClick={() => setIsPrivacyModalOpen(true)} className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Privacy Policy</button>
               <a href="#" className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Terms of Service</a>
               <a href="#" className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Contact</a>
             </div>
@@ -989,7 +1018,8 @@ export default function App() {
           </div>
         </footer>
       </motion.div>
-      <CookieConsent />
+      <CookieConsent openPrivacyPolicy={() => setIsPrivacyModalOpen(true)} />
+      <PrivacyPolicyModal isOpen={isPrivacyModalOpen} onClose={() => setIsPrivacyModalOpen(false)} />
     </div>
   );
 }
