@@ -262,7 +262,82 @@ function CookieConsent({ isVisible, onAccept, onDecline, openPrivacyPolicy }: { 
   );
 }
 
+const ARTICLES = [
+  {
+    slug: 'paid-ads-scaling',
+    title: 'Scaling Paid Ads Without Losing Profitability',
+    excerpt: 'Discover why most brands leak revenue on Meta and Google, and how our engineered growth systems cap CAC while scaling volume.',
+    content: `When brands try to scale paid ads quickly, they often run into a brick wall: Customer Acquisition Cost (CAC) skyrockets, and profitability vanishes. 
+    
+Our approach treats paid ads not as an isolated tactic, but as the fuel for a broader engine. We structure campaigns around revenue-focused goals, rigorously test creative angles, and implement strong feedback loops with your CRM. By tracking the true lifetime value (LTV) of acquired customers, we ensure that every dollar spent is buying actual profit, not just vanity metrics like clicks and impressions.
+
+Scaling paid ads successfully is entirely about data architecture: knowing your cost per lead, cost per acquisition, and cash multiplication cycle. Without this, you aren't investing; you're gambling.`
+  },
+  {
+    slug: 'crm-automations',
+    title: 'Why Automations are the Secret to High Close Rates',
+    excerpt: 'Stop letting leads fall through the cracks. Learn how perfectly timed email and SMS flows can double your conversion rates overnight.',
+    content: `Most businesses spend thousands generating leads, only to let them silently drop out of the pipeline. A strong CRM paired with strategic email and SMS automations is the single biggest "quick win" for any growing brand.
+
+We build welcome flows, abandoned cart sequences, and behavioral trigger emails that feel personal rather than robotic. When leads receive the right message at exactly the right time, trust builds instantly. Stop relying on manual follow-ups—let your infrastructure automatically nurture and convert for you 24/7.
+
+Effective automation doesn't mean spamming your list. It means providing high-value resources, handling objections proactively, and gracefully reminding your prospects exactly why they signed up in the first place.`
+  },
+  {
+    slug: 'mastering-retargeting',
+    title: 'Mastering Full-Funnel Retargeting',
+    excerpt: 'Retargeting isn\'t just about showing the same ad everywhere. It\'s about moving prospects intelligently through the buyer\'s journey.',
+    content: `Standard retargeting is lazy: showing the exact same product image to someone for 30 days straight. Engineered retargeting is sequential and psychological.
+
+First, we address objections. If they visited the pricing page but didn't convert, the retargeting ad should offer an ROI calculator or a case study to build trust. Next, we build urgency with limited-time offers or fast-action bonuses. Finally, we make a soft down-sell into an email list if they still aren't ready to buy today. 
+
+By segmenting your retargeting traffic based on exactly what actions they took on your site, we turn hesitant window-shoppers into high-value lifelong customers.`
+  }
+];
+
+function BlogList() {
+  return (
+    <section className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-screen">
+      <h1 className="text-4xl md:text-6xl font-bold mb-12 text-white">Apex Growth <span className="text-[#C8A96A]">Blog</span></h1>
+      <div className="grid gap-8">
+        {ARTICLES.map(article => (
+          <a key={article.slug} href={`#/blog/${article.slug}`} className="bg-[#0D2233] border border-white/10 p-8 rounded-3xl hover:border-[#C8A96A]/50 transition-all flex flex-col group block">
+            <h2 className="text-2xl font-semibold text-white mb-3 group-hover:text-[#C8A96A] transition-colors">{article.title}</h2>
+            <p className="text-[#A3B1C6] leading-relaxed">{article.excerpt}</p>
+            <div className="mt-6 font-medium text-[#C8A96A] text-sm">Read full article →</div>
+          </a>
+        ))}
+      </div>
+    </section >
+  );
+}
+
+function ArticleView({ hash }: { hash: string }) {
+  const slug = hash.replace('#/blog/', '');
+  const article = ARTICLES.find(a => a.slug === slug);
+
+  if (!article) {
+    return (
+      <div className="pt-32 pb-24 text-center min-h-screen">
+        <h1 className="text-3xl text-white">Article not found</h1>
+        <a href="#/blog" className="text-[#C8A96A] hover:text-[#B5985F] mt-4 inline-block font-medium">← Back to Blog</a>
+      </div>
+    );
+  }
+
+  return (
+    <section className="pt-32 pb-24 px-6 max-w-3xl mx-auto min-h-screen">
+      <a href="#/blog" className="text-[#A3B1C6] hover:text-white mb-8 inline-block font-medium transition-colors">← Back to Blog</a>
+      <h1 className="text-3xl md:text-5xl font-bold mb-8 text-white leading-tight">{article.title}</h1>
+      <div className="text-lg text-[#A3B1C6] leading-relaxed space-y-6 whitespace-pre-wrap">
+        {article.content}
+      </div>
+    </section>
+  );
+}
+
 export default function App() {
+  const [route, setRoute] = useState(window.location.hash || '#/');
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [showCookieConsent, setShowCookieConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -272,6 +347,9 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const handleHash = () => setRoute(window.location.hash || '#/');
+    window.addEventListener('hashchange', handleHash);
+
     // Check initial cookie consent
     if (!localStorage.getItem('apex_labs_cookie_consent')) {
       setShowCookieConsent(true);
@@ -281,7 +359,10 @@ export default function App() {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2500);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('hashchange', handleHash);
+    };
   }, []);
 
   const handleQualifySubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -407,6 +488,7 @@ export default function App() {
 
             {/* Left: Links */}
             <div className="hidden md:flex items-center gap-8 flex-1">
+              <a href="#/blog" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">Blog</a>
               <a href="#problem" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">The Problem</a>
               <a href="#system" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">Our System</a>
               <a href="#results" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">Results</a>
@@ -425,567 +507,569 @@ export default function App() {
         </nav>
 
         <main className="relative z-10">
-
-          {/* Hero Section */}
-          <section className="pt-32 pb-24 px-6 max-w-7xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C8A96A]/10 border border-[#C8A96A]/30 text-[#C8A96A] font-medium text-sm mb-8">
-                <span className="w-2 h-2 rounded-full bg-[#C8A96A] animate-pulse"></span>
-                Accepting new partners for Q3
-              </div>
-
-              <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl tracking-tight mb-8 leading-[1.1]">
-                Stop Scaling Noise.<br />
-                Start Scaling <span className="text-[#C8A96A] relative inline-block">
-                  Revenue.
-                  <span className="absolute -bottom-2 left-0 w-full h-1.5 bg-[#C8A96A] rounded-full opacity-80"></span>
-                </span>
-              </h1>
-
-              <p className="font-normal text-lg md:text-xl text-[#A3B1C6] max-w-2xl mx-auto mb-12 leading-relaxed">
-                We build engineered growth systems for global brands that demand measurable ROI, not just vanity metrics.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
-                  href="#apply"
-                  className="font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.3)]"
+          {route === '#/blog' ? <BlogList /> : route.startsWith('#/blog/') ? <ArticleView hash={route} /> : (
+            <>
+              {/* Hero Section */}
+              <section className="pt-32 pb-24 px-6 max-w-7xl mx-auto text-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
                 >
-                  Apply for Partnership <ArrowRight size={18} />
-                </a>
-                <a
-                  href="#results"
-                  className="font-medium text-base bg-transparent text-[#FFFFFF] px-8 py-4 rounded-full flex items-center gap-2 hover:bg-white/5 transition-all border border-white/10"
-                >
-                  View Case Studies
-                </a>
-              </div>
-            </motion.div>
-          </section>
-
-          {/* Problem Section */}
-          <section id="problem" className="py-24 px-6 border-y border-white/5 bg-black/20">
-            <div className="max-w-7xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-center mb-16"
-              >
-                <h2 className="font-semibold text-3xl md:text-5xl mb-6">
-                  Why most brands <span className="text-[#C8A96A]">leak revenue</span>.
-                </h2>
-                <p className="font-normal text-lg text-[#A3B1C6] max-w-3xl mx-auto">
-                  Most brands run social, ads, and email as disconnected tactics. Agencies report on likes and ROAS, while broken funnels, weak follow ups, and messy CRMs quietly kill profit.
-                </p>
-              </motion.div>
-
-              <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div className="bg-[#0B1D2A] border border-white/5 p-8 rounded-3xl opacity-60 relative overflow-hidden group">
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/12 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C8A96A]/10 border border-[#C8A96A]/30 text-[#C8A96A] font-medium text-sm mb-8">
+                    <span className="w-2 h-2 rounded-full bg-[#C8A96A] animate-pulse"></span>
+                    Accepting new partners for Q3
                   </div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-[#A3B1C6]">
-                      <BarChart3 size={20} />
-                    </div>
-                    <h3 className="font-semibold text-xl text-[#A3B1C6]">The Industry Standard</h3>
+
+                  <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl tracking-tight mb-8 leading-[1.1]">
+                    Stop Scaling Noise.<br />
+                    Start Scaling <span className="text-[#C8A96A] relative inline-block">
+                      Revenue.
+                      <span className="absolute -bottom-2 left-0 w-full h-1.5 bg-[#C8A96A] rounded-full opacity-80"></span>
+                    </span>
+                  </h1>
+
+                  <p className="font-normal text-lg md:text-xl text-[#A3B1C6] max-w-2xl mx-auto mb-12 leading-relaxed">
+                    We build engineered growth systems for global brands that demand measurable ROI, not just vanity metrics.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a
+                      href="#apply"
+                      className="font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.3)]"
+                    >
+                      Apply for Partnership <ArrowRight size={18} />
+                    </a>
+                    <a
+                      href="#results"
+                      className="font-medium text-base bg-transparent text-[#FFFFFF] px-8 py-4 rounded-full flex items-center gap-2 hover:bg-white/5 transition-all border border-white/10"
+                    >
+                      View Case Studies
+                    </a>
                   </div>
-                  <ul className="space-y-4">
-                    {[
-                      'Social, email, and SMS run in silos',
-                      'Ad agencies optimize for clicks, not customers',
-                      'Leads fall through the cracks with no CRM discipline',
-                      'Follow ups stop after one or two touches'
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 font-normal text-[#A3B1C6]">
-                        <span className="mt-1 text-white/20">✕</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                </motion.div>
+              </section>
 
-                <div className="bg-gradient-to-b from-[#C8A96A]/10 to-transparent border border-[#C8A96A]/30 p-8 rounded-3xl relative overflow-hidden group">
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/18 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
-                  </div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#C8A96A] opacity-5 blur-[50px]"></div>
-                  <div className="flex items-center gap-3 mb-6 relative z-10">
-                    <div className="w-10 h-10 rounded-full bg-[#C8A96A] flex items-center justify-center text-white">
-                      <TrendingUp size={20} />
-                    </div>
-                    <h3 className="font-semibold text-xl text-[#FFFFFF]">The Apex Standard</h3>
-                  </div>
-                  <ul className="space-y-4 relative z-10">
-                    {[
-                      'Unified social, ads, landing pages, and follow ups',
-                      'Funnels designed around revenue, not vanity metrics',
-                      'CRM, email, and SMS automation that work together',
-                      'Clear numbers on what it costs to acquire and retain a customer'
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 font-normal text-[#FFFFFF]">
-                        <CheckCircle2 className="mt-0.5 text-[#C8A96A] shrink-0" size={18} />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* System Section */}
-          <section id="system" className="py-32 px-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-20">
-                <h2 className="font-semibold text-3xl md:text-5xl mb-6">
-                  The Apex <span className="text-[#C8A96A]">Growth System</span>
-                </h2>
-                <p className="font-normal text-lg text-[#A3B1C6] max-w-3xl mx-auto">
-                  We engineer full-funnel growth systems that combine social media management, paid ads, high-converting
-                  landing pages and funnels, and automated follow ups across email, SMS, and CRM.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-3 mb-16">
-                {[
-                  "Social media management & marketing",
-                  "Meta & Google paid ads",
-                  "Landing pages & funnels",
-                  "CRM & pipeline setup",
-                  "Email marketing & automation",
-                  "SMS automation & follow ups"
-                ].map((service) => (
-                  <span
-                    key={service}
-                    className="inline-flex items-center rounded-full border border-[#C8A96A]/40 bg-[#0D2233] px-4 py-2 text-xs md:text-sm font-medium text-[#FFFFFF]/90 tracking-wide"
-                  >
-                    {service}
-                  </span>
-                ))}
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-8">
-                {[
-                  {
-                    icon: <Target size={24} className="text-[#C8A96A]" />,
-                    title: "1. Paid Social & Ads Engine",
-                    desc: "We manage your social media presence and run Meta and Google ads that drive qualified traffic into your funnel—not just impressions."
-                  },
-                  {
-                    icon: <Zap size={24} className="text-[#C8A96A]" />,
-                    title: "2. Landing Pages & Funnels",
-                    desc: "We design and optimize conversion-focused landing pages and funnels that turn cold clicks into booked calls and revenue."
-                  },
-                  {
-                    icon: <TrendingUp size={24} className="text-[#C8A96A]" />,
-                    title: "3. Follow Ups & Automation",
-                    desc: "We build CRM, email, and SMS automation that nurtures, follows up, and recovers missed revenue without adding work to your team."
-                  }
-                ].map((step, index) => (
+              {/* Problem Section */}
+              <section id="problem" className="py-24 px-6 border-y border-white/5 bg-black/20">
+                <div className="max-w-7xl mx-auto">
                   <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-[#0B1D2A] border border-white/10 p-8 rounded-3xl hover:border-[#C8A96A]/30 transition-colors relative overflow-hidden group"
+                    className="text-center mb-16"
                   >
-                    <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/14 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
-                    </div>
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#C8A96A]/20 transition-colors">
-                      {step.icon}
-                    </div>
-                    <h3 className="font-semibold text-xl mb-4 text-[#FFFFFF]">{step.title}</h3>
-                    <p className="font-normal text-[#A3B1C6] leading-relaxed">
-                      {step.desc}
+                    <h2 className="font-semibold text-3xl md:text-5xl mb-6">
+                      Why most brands <span className="text-[#C8A96A]">leak revenue</span>.
+                    </h2>
+                    <p className="font-normal text-lg text-[#A3B1C6] max-w-3xl mx-auto">
+                      Most brands run social, ads, and email as disconnected tactics. Agencies report on likes and ROAS, while broken funnels, weak follow ups, and messy CRMs quietly kill profit.
                     </p>
                   </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
 
-          {/* Authority Proof Section */}
-          <section id="results" className="py-24 px-6 border-y border-white/5 bg-black/20">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
-                {[
-                  { metric: "$150M+", label: "Revenue Generated" },
-                  { metric: "312%", label: "Average ROI Increase" },
-                  { metric: "45+", label: "Global Partners" },
-                  { metric: "< 30", label: "Days to Profitability" }
-                ].map((stat, i) => (
-                  <div key={i} className="text-center">
-                    <div className="font-bold text-4xl md:text-5xl text-[#FFFFFF] mb-2">{stat.metric}</div>
-                    <div className="font-medium text-sm text-[#C8A96A] uppercase tracking-wider">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                <CaseStudyCard
-                  number="Case Study 01"
-                  title="Global SaaS Platform"
-                  description="Scaled monthly recurring revenue by restructuring their paid acquisition funnel and implementing aggressive CRO."
-                  metrics={[
-                    { value: "+450% MRR", label: "Growth", isPrimary: true },
-                    { value: "-40% CAC", label: "Efficiency" }
-                  ]}
-                />
-                <CaseStudyCard
-                  number="Case Study 02"
-                  title="DTC E-Commerce"
-                  description="Broke through a 6-month growth plateau by deploying our creative testing framework and rebuilding their data architecture."
-                  metrics={[
-                    { value: "$2.4M/mo", label: "Revenue", isPrimary: true },
-                    { value: "3.8x ROAS", label: "Ad Spend" }
-                  ]}
-                />
-              </div>
-
-            </div>
-          </section>
-
-          {/* Embedded Application Form */}
-          <section id="apply" className="py-24 px-6 bg-[#0B1D2A]">
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-10">
-                <h2 className="font-semibold text-3xl md:text-4xl mb-4">
-                  Apply to work with <span className="text-[#C8A96A]">Apex Labs</span>
-                </h2>
-                <p className="font-normal text-lg text-[#A3B1C6]">
-                  First, answer a few quick questions so we can confirm you&apos;re a fit for our partnership model.
-                </p>
-              </div>
-
-              {!isQualified && (
-                <form
-                  onSubmit={handleQualifySubmit}
-                  className="mb-10 bg-[#060F17] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6"
-                >
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">
-                        What is your current monthly ad spend?
-                      </label>
-                      <select
-                        name="qualAdSpend"
-                        required
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                      >
-                        <option value="">Select range</option>
-                        <option value="under-800">Under $800 / month</option>
-                        <option value="800-1000">$800 – $1,000 / month</option>
-                        <option value="1000-plus">$1,000 – $5,000 / month</option>
-                        <option value="5000-plus">$5,000+ / month</option>
-                      </select>
+                  <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div className="bg-[#0B1D2A] border border-white/5 p-8 rounded-3xl opacity-60 relative overflow-hidden group">
+                      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/12 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
+                      </div>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-[#A3B1C6]">
+                          <BarChart3 size={20} />
+                        </div>
+                        <h3 className="font-semibold text-xl text-[#A3B1C6]">The Industry Standard</h3>
+                      </div>
+                      <ul className="space-y-4">
+                        {[
+                          'Social, email, and SMS run in silos',
+                          'Ad agencies optimize for clicks, not customers',
+                          'Leads fall through the cracks with no CRM discipline',
+                          'Follow ups stop after one or two touches'
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-start gap-3 font-normal text-[#A3B1C6]">
+                            <span className="mt-1 text-white/20">✕</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">
-                        What is your current monthly revenue?
-                      </label>
-                      <select
-                        name="qualRevenue"
-                        required
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                      >
-                        <option value="">Select range</option>
-                        <option value="under-25k">Under $25k / month</option>
-                        <option value="25-100k">$25k – $100k / month</option>
-                        <option value="100k-plus">$100k+ / month</option>
-                      </select>
+
+                    <div className="bg-gradient-to-b from-[#C8A96A]/10 to-transparent border border-[#C8A96A]/30 p-8 rounded-3xl relative overflow-hidden group">
+                      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/18 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
+                      </div>
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-[#C8A96A] opacity-5 blur-[50px]"></div>
+                      <div className="flex items-center gap-3 mb-6 relative z-10">
+                        <div className="w-10 h-10 rounded-full bg-[#C8A96A] flex items-center justify-center text-white">
+                          <TrendingUp size={20} />
+                        </div>
+                        <h3 className="font-semibold text-xl text-[#FFFFFF]">The Apex Standard</h3>
+                      </div>
+                      <ul className="space-y-4 relative z-10">
+                        {[
+                          'Unified social, ads, landing pages, and follow ups',
+                          'Funnels designed around revenue, not vanity metrics',
+                          'CRM, email, and SMS automation that work together',
+                          'Clear numbers on what it costs to acquire and retain a customer'
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-start gap-3 font-normal text-[#FFFFFF]">
+                            <CheckCircle2 className="mt-0.5 text-[#C8A96A] shrink-0" size={18} />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
+                </div>
+              </section>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">
-                        Have you tried social media or paid ads before?
-                      </label>
-                      <div className="flex gap-4 text-sm text-[#FFFFFF]">
-                        <label className="inline-flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="qualTried"
-                            value="yes"
+              {/* System Section */}
+              <section id="system" className="py-32 px-6">
+                <div className="max-w-7xl mx-auto">
+                  <div className="text-center mb-20">
+                    <h2 className="font-semibold text-3xl md:text-5xl mb-6">
+                      The Apex <span className="text-[#C8A96A]">Growth System</span>
+                    </h2>
+                    <p className="font-normal text-lg text-[#A3B1C6] max-w-3xl mx-auto">
+                      We engineer full-funnel growth systems that combine social media management, paid ads, high-converting
+                      landing pages and funnels, and automated follow ups across email, SMS, and CRM.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-3 mb-16">
+                    {[
+                      "Social media management & marketing",
+                      "Meta & Google paid ads",
+                      "Landing pages & funnels",
+                      "CRM & pipeline setup",
+                      "Email marketing & automation",
+                      "SMS automation & follow ups"
+                    ].map((service) => (
+                      <span
+                        key={service}
+                        className="inline-flex items-center rounded-full border border-[#C8A96A]/40 bg-[#0D2233] px-4 py-2 text-xs md:text-sm font-medium text-[#FFFFFF]/90 tracking-wide"
+                      >
+                        {service}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-8">
+                    {[
+                      {
+                        icon: <Target size={24} className="text-[#C8A96A]" />,
+                        title: "1. Paid Social & Ads Engine",
+                        desc: "We manage your social media presence and run Meta and Google ads that drive qualified traffic into your funnel—not just impressions."
+                      },
+                      {
+                        icon: <Zap size={24} className="text-[#C8A96A]" />,
+                        title: "2. Landing Pages & Funnels",
+                        desc: "We design and optimize conversion-focused landing pages and funnels that turn cold clicks into booked calls and revenue."
+                      },
+                      {
+                        icon: <TrendingUp size={24} className="text-[#C8A96A]" />,
+                        title: "3. Follow Ups & Automation",
+                        desc: "We build CRM, email, and SMS automation that nurtures, follows up, and recovers missed revenue without adding work to your team."
+                      }
+                    ].map((step, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="bg-[#0B1D2A] border border-white/10 p-8 rounded-3xl hover:border-[#C8A96A]/30 transition-colors relative overflow-hidden group"
+                      >
+                        <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                          <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/14 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
+                        </div>
+                        <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#C8A96A]/20 transition-colors">
+                          {step.icon}
+                        </div>
+                        <h3 className="font-semibold text-xl mb-4 text-[#FFFFFF]">{step.title}</h3>
+                        <p className="font-normal text-[#A3B1C6] leading-relaxed">
+                          {step.desc}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* Authority Proof Section */}
+              <section id="results" className="py-24 px-6 border-y border-white/5 bg-black/20">
+                <div className="max-w-7xl mx-auto">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+                    {[
+                      { metric: "$150M+", label: "Revenue Generated" },
+                      { metric: "312%", label: "Average ROI Increase" },
+                      { metric: "45+", label: "Global Partners" },
+                      { metric: "< 30", label: "Days to Profitability" }
+                    ].map((stat, i) => (
+                      <div key={i} className="text-center">
+                        <div className="font-bold text-4xl md:text-5xl text-[#FFFFFF] mb-2">{stat.metric}</div>
+                        <div className="font-medium text-sm text-[#C8A96A] uppercase tracking-wider">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <CaseStudyCard
+                      number="Case Study 01"
+                      title="Global SaaS Platform"
+                      description="Scaled monthly recurring revenue by restructuring their paid acquisition funnel and implementing aggressive CRO."
+                      metrics={[
+                        { value: "+450% MRR", label: "Growth", isPrimary: true },
+                        { value: "-40% CAC", label: "Efficiency" }
+                      ]}
+                    />
+                    <CaseStudyCard
+                      number="Case Study 02"
+                      title="DTC E-Commerce"
+                      description="Broke through a 6-month growth plateau by deploying our creative testing framework and rebuilding their data architecture."
+                      metrics={[
+                        { value: "$2.4M/mo", label: "Revenue", isPrimary: true },
+                        { value: "3.8x ROAS", label: "Ad Spend" }
+                      ]}
+                    />
+                  </div>
+
+                </div>
+              </section>
+
+              {/* Embedded Application Form */}
+              <section id="apply" className="py-24 px-6 bg-[#0B1D2A]">
+                <div className="max-w-3xl mx-auto">
+                  <div className="text-center mb-10">
+                    <h2 className="font-semibold text-3xl md:text-4xl mb-4">
+                      Apply to work with <span className="text-[#C8A96A]">Apex Labs</span>
+                    </h2>
+                    <p className="font-normal text-lg text-[#A3B1C6]">
+                      First, answer a few quick questions so we can confirm you&apos;re a fit for our partnership model.
+                    </p>
+                  </div>
+
+                  {!isQualified && (
+                    <form
+                      onSubmit={handleQualifySubmit}
+                      className="mb-10 bg-[#060F17] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6"
+                    >
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">
+                            What is your current monthly ad spend?
+                          </label>
+                          <select
+                            name="qualAdSpend"
                             required
-                            className="h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
-                          />
-                          Yes
-                        </label>
-                        <label className="inline-flex items-center gap-2">
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                          >
+                            <option value="">Select range</option>
+                            <option value="under-800">Under $800 / month</option>
+                            <option value="800-1000">$800 – $1,000 / month</option>
+                            <option value="1000-plus">$1,000 – $5,000 / month</option>
+                            <option value="5000-plus">$5,000+ / month</option>
+                          </select>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">
+                            What is your current monthly revenue?
+                          </label>
+                          <select
+                            name="qualRevenue"
+                            required
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                          >
+                            <option value="">Select range</option>
+                            <option value="under-25k">Under $25k / month</option>
+                            <option value="25-100k">$25k – $100k / month</option>
+                            <option value="100k-plus">$100k+ / month</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">
+                            Have you tried social media or paid ads before?
+                          </label>
+                          <div className="flex gap-4 text-sm text-[#FFFFFF]">
+                            <label className="inline-flex items-center gap-2">
+                              <input
+                                type="radio"
+                                name="qualTried"
+                                value="yes"
+                                required
+                                className="h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
+                              />
+                              Yes
+                            </label>
+                            <label className="inline-flex items-center gap-2">
+                              <input
+                                type="radio"
+                                name="qualTried"
+                                value="no"
+                                className="h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
+                              />
+                              No
+                            </label>
+                          </div>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">
+                            What is your primary growth goal right now?
+                          </label>
+                          <select
+                            name="qualGoal"
+                            required
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                          >
+                            <option value="">Select goal</option>
+                            <option value="scale-profitably">Scale revenue profitably</option>
+                            <option value="improve-roas">Improve ROAS / CAC</option>
+                            <option value="launch-new-market">Launch into new markets</option>
+                            <option value="rebuild-infrastructure">Rebuild tracking & infrastructure</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="w-full font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.4)]"
+                      >
+                        Check if we&apos;re a fit
+                      </button>
+
+                      {qualifyMessage && (
+                        <p className="mt-3 text-sm text-center text-[#A3B1C6]">
+                          {qualifyMessage}
+                        </p>
+                      )}
+                    </form>
+                  )}
+
+                  {isQualified && (
+                    <form
+                      onSubmit={handleApplySubmit}
+                      className="bg-[#060F17] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6 shadow-[0_0_40px_rgba(0,0,0,0.6)] relative overflow-hidden group"
+                    >
+                      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/8 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">Full Name</label>
                           <input
-                            type="radio"
-                            name="qualTried"
-                            value="no"
-                            className="h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
+                            type="text"
+                            name="fullName"
+                            required
+                            placeholder="Jane Doe"
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                           />
-                          No
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">Work Email</label>
+                          <input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder="you@company.com"
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">Brand / Company</label>
+                          <input
+                            type="text"
+                            name="company"
+                            required
+                            placeholder="Apex Labs"
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">Website URL</label>
+                          <input
+                            type="url"
+                            name="website"
+                            placeholder="https://yourbrand.com"
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">
+                            Monthly Ad Spend (USD)
+                          </label>
+                          <select
+                            required
+                            name="adSpend"
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                          >
+                            <option value="">Select range</option>
+                            <option value="under-25k">Under $25k</option>
+                            <option value="25-50k">$25k – $50k</option>
+                            <option value="50-100k">$50k – $100k</option>
+                            <option value="100k-plus">$100k+</option>
+                          </select>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="font-medium text-sm text-[#FFFFFF]">
+                            Primary Growth Goal
+                          </label>
+                          <select
+                            required
+                            name="goal"
+                            className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                          >
+                            <option value="">Select goal</option>
+                            <option value="scale-profitably">Scale revenue profitably</option>
+                            <option value="improve-roas">Improve ROAS / CAC</option>
+                            <option value="launch-new-market">Launch into new markets</option>
+                            <option value="rebuild-infrastructure">Rebuild tracking & infrastructure</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <label className="font-medium text-sm text-[#FFFFFF]">
+                          What does success look like in the next 6–12 months?
+                        </label>
+                        <textarea
+                          rows={4}
+                          placeholder="Share targets, constraints, and any context our team should know."
+                          name="successWindow"
+                          className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] resize-none focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+                        />
+                      </div>
+
+                      <div className="flex items-start gap-3 text-sm text-[#A3B1C6]">
+                        <input
+                          id="accept-terms"
+                          type="checkbox"
+                          required
+                          name="acceptTerms"
+                          className="mt-1 h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
+                        />
+                        <label htmlFor="accept-terms">
+                          I agree to be contacted by Apex Labs regarding this application and confirm I have read the{' '}
+                          <button type="button" onClick={() => setIsPrivacyModalOpen(true)} className="underline hover:text-[#FFFFFF]">privacy policy</button>.
                         </label>
                       </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">
-                        What is your primary growth goal right now?
-                      </label>
-                      <select
-                        name="qualGoal"
-                        required
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
+
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
                       >
-                        <option value="">Select goal</option>
-                        <option value="scale-profitably">Scale revenue profitably</option>
-                        <option value="improve-roas">Improve ROAS / CAC</option>
-                        <option value="launch-new-market">Launch into new markets</option>
-                        <option value="rebuild-infrastructure">Rebuild tracking & infrastructure</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.4)]"
-                  >
-                    Check if we&apos;re a fit
-                  </button>
-
-                  {qualifyMessage && (
-                    <p className="mt-3 text-sm text-center text-[#A3B1C6]">
-                      {qualifyMessage}
-                    </p>
+                        {isSubmitting ? 'Submitting…' : 'Submit Application'}
+                      </button>
+                      {submitMessage && (
+                        <p className="mt-3 text-sm text-center text-[#A3B1C6]">
+                          {submitMessage}
+                        </p>
+                      )}
+                    </form>
                   )}
-                </form>
-              )}
-
-              {isQualified && (
-                <form
-                  onSubmit={handleApplySubmit}
-                  className="bg-[#060F17] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6 shadow-[0_0_40px_rgba(0,0,0,0.6)] relative overflow-hidden group"
-                >
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/8 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">Full Name</label>
-                      <input
-                        type="text"
-                        name="fullName"
-                        required
-                        placeholder="Jane Doe"
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">Work Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="you@company.com"
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">Brand / Company</label>
-                      <input
-                        type="text"
-                        name="company"
-                        required
-                        placeholder="Apex Labs"
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">Website URL</label>
-                      <input
-                        type="url"
-                        name="website"
-                        placeholder="https://yourbrand.com"
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">
-                        Monthly Ad Spend (USD)
-                      </label>
-                      <select
-                        required
-                        name="adSpend"
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                      >
-                        <option value="">Select range</option>
-                        <option value="under-25k">Under $25k</option>
-                        <option value="25-50k">$25k – $50k</option>
-                        <option value="50-100k">$50k – $100k</option>
-                        <option value="100k-plus">$100k+</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#FFFFFF]">
-                        Primary Growth Goal
-                      </label>
-                      <select
-                        required
-                        name="goal"
-                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                      >
-                        <option value="">Select goal</option>
-                        <option value="scale-profitably">Scale revenue profitably</option>
-                        <option value="improve-roas">Improve ROAS / CAC</option>
-                        <option value="launch-new-market">Launch into new markets</option>
-                        <option value="rebuild-infrastructure">Rebuild tracking & infrastructure</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="font-medium text-sm text-[#FFFFFF]">
-                      What does success look like in the next 6–12 months?
-                    </label>
-                    <textarea
-                      rows={4}
-                      placeholder="Share targets, constraints, and any context our team should know."
-                      name="successWindow"
-                      className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] resize-none focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
-                    />
-                  </div>
-
-                  <div className="flex items-start gap-3 text-sm text-[#A3B1C6]">
-                    <input
-                      id="accept-terms"
-                      type="checkbox"
-                      required
-                      name="acceptTerms"
-                      className="mt-1 h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
-                    />
-                    <label htmlFor="accept-terms">
-                      I agree to be contacted by Apex Labs regarding this application and confirm I have read the{' '}
-                      <button type="button" onClick={() => setIsPrivacyModalOpen(true)} className="underline hover:text-[#FFFFFF]">privacy policy</button>.
-                    </label>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? 'Submitting…' : 'Submit Application'}
-                  </button>
-                  {submitMessage && (
-                    <p className="mt-3 text-sm text-center text-[#A3B1C6]">
-                      {submitMessage}
-                    </p>
-                  )}
-                </form>
-              )}
-            </div>
-          </section>
-
-          <BookingSection />
-
-          {/* CTA Section */}
-
-          <section className="py-32 px-6">
-            <div className="max-w-5xl mx-auto">
-              <div className="bg-[#C8A96A] border-2 border-[#C8A96A] rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden shadow-[0_0_50px_rgba(198,168,90,0.15)]">
-                {/* Decorative elements */}
-                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 to-transparent pointer-events-none"></div>
-
-                <div className="relative z-10">
-                  <h2 className="font-semibold text-4xl md:text-6xl text-[#FFFFFF] mb-6 tracking-tight">
-                    Ready to engineer your growth?
-                  </h2>
-                  <p className="font-normal text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10">
-                    We only partner with brands where we know we can drive massive impact. Apply below to see if you qualify for our Q3 cohort.
-                  </p>
-                  <a
-                    href="#apply"
-                    className="font-medium text-base bg-[#0B1D2A] text-[#C8A96A] px-10 py-5 rounded-full inline-flex items-center gap-2 hover:bg-black transition-all shadow-xl hover:scale-105 active:scale-95"
-                  >
-                    Apply For Partnership <ArrowRight size={18} />
-                  </a>
                 </div>
-              </div>
-            </div>
-          </section>
+              </section>
 
-          {/* FAQ Section */}
-          <section id="faq" className="py-24 px-6 bg-[#0B1D2A] border-t border-white/5">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="font-semibold text-3xl md:text-4xl mb-8 text-[#FFFFFF]">
-                FAQ: Common questions about partnering with Apex Labs
-              </h2>
+              <BookingSection />
 
-              <div className="divide-y divide-white/10">
-                {[
-                  {
-                    q: "What exactly does Apex Labs do for social media?",
-                    a: "We handle end-to-end social media for growth: content strategy, calendar planning, creative direction, and performance-focused posts and stories. For paid, we build and manage campaigns on platforms like Meta that are tightly aligned with your funnels so every piece of content is working toward revenue, not just engagement."
-                  },
-                  {
-                    q: "How do you manage Meta and Google ads differently from a typical agency?",
-                    a: "We treat ads as part of a bigger system, not isolated campaigns. That means structured testing of angles, hooks, and creatives; tight control of audiences and budgets; and constant feedback loops with landing page and email/SMS performance so we can scale winners and cut losers quickly."
-                  },
-                  {
-                    q: "Do you build our landing pages and funnels for us?",
-                    a: "Yes. We design and build high-converting landing pages and funnels that match your brand and offers. This includes wireframing, copy, design direction, and implementation in the tools you use (e.g., Webflow, ClickFunnels, or custom setups), plus ongoing A/B testing on headlines, offers, and layouts."
-                  },
-                  {
-                    q: "What do you handle around CRM and follow ups?",
-                    a: "We help you set up or refine your CRM so leads are captured, routed, and followed up with automatically. That includes pipeline stages, automations, and basic reporting so you always know where deals are, what your close rates look like, and where revenue is being left on the table."
-                  },
-                  {
-                    q: "How deep do you go with email marketing and automation?",
-                    a: "We build and optimize full email ecosystems: welcome flows, post-purchase sequences, reactivation campaigns, launch campaigns, and behavior-based automations. We write the strategy and flows, draft or guide the copy, and run ongoing testing on subject lines, sends, and segments to consistently lift revenue per subscriber."
-                  },
-                  {
-                    q: "What about SMS automation and compliance?",
-                    a: "We set up SMS journeys for high-intent, timely touchpoints like abandon cart, lead follow up, and limited-time offers. We work within the rules of your SMS platform and region, ensure proper consent flows, and keep messages short, valuable, and aligned with your brand so they feel like a helpful nudge, not spam."
-                  },
-                  {
-                    q: "Who is a good fit to work with Apex Labs?",
-                    a: "Our best partners are brands already generating consistent revenue and investing in ads, but who know their funnel and follow ups aren’t fully dialed in. Typically they are spending at least $25k per month on paid traffic and want a partner to own social, paid ads, funnels, and follow ups as a single growth system."
-                  },
-                  {
-                    q: "What happens after I submit the application form?",
-                    a: "Within 2–3 business days, our team reviews your answers and current setup. If there’s a strong fit, we’ll invite you to a strategy call where we walk through your numbers, show you where we see the biggest opportunities across ads, funnels, and follow ups, and outline what an engagement with Apex Labs would look like."
-                  }
-                ].map((item, idx) => (
-                  <details
-                    key={idx}
-                    className="group py-4"
-                  >
-                    <summary className="flex items-center justify-between cursor-pointer list-none">
-                      <span className="font-medium text-base md:text-lg text-[#FFFFFF]">
-                        {item.q}
-                      </span>
-                      <span className="ml-4 text-[#C8A96A] text-xl leading-none group-open:rotate-45 transition-transform">
-                        +
-                      </span>
-                    </summary>
-                    <p className="mt-3 text-sm md:text-base text-[#A3B1C6] leading-relaxed max-w-3xl">
-                      {item.a}
-                    </p>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </section>
+              {/* CTA Section */}
 
+              <section className="py-32 px-6">
+                <div className="max-w-5xl mx-auto">
+                  <div className="bg-[#C8A96A] border-2 border-[#C8A96A] rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden shadow-[0_0_50px_rgba(198,168,90,0.15)]">
+                    {/* Decorative elements */}
+                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 to-transparent pointer-events-none"></div>
+
+                    <div className="relative z-10">
+                      <h2 className="font-semibold text-4xl md:text-6xl text-[#FFFFFF] mb-6 tracking-tight">
+                        Ready to engineer your growth?
+                      </h2>
+                      <p className="font-normal text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10">
+                        We only partner with brands where we know we can drive massive impact. Apply below to see if you qualify for our Q3 cohort.
+                      </p>
+                      <a
+                        href="#apply"
+                        className="font-medium text-base bg-[#0B1D2A] text-[#C8A96A] px-10 py-5 rounded-full inline-flex items-center gap-2 hover:bg-black transition-all shadow-xl hover:scale-105 active:scale-95"
+                      >
+                        Apply For Partnership <ArrowRight size={18} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* FAQ Section */}
+              <section id="faq" className="py-24 px-6 bg-[#0B1D2A] border-t border-white/5">
+                <div className="max-w-5xl mx-auto">
+                  <h2 className="font-semibold text-3xl md:text-4xl mb-8 text-[#FFFFFF]">
+                    FAQ: Common questions about partnering with Apex Labs
+                  </h2>
+
+                  <div className="divide-y divide-white/10">
+                    {[
+                      {
+                        q: "What exactly does Apex Labs do for social media?",
+                        a: "We handle end-to-end social media for growth: content strategy, calendar planning, creative direction, and performance-focused posts and stories. For paid, we build and manage campaigns on platforms like Meta that are tightly aligned with your funnels so every piece of content is working toward revenue, not just engagement."
+                      },
+                      {
+                        q: "How do you manage Meta and Google ads differently from a typical agency?",
+                        a: "We treat ads as part of a bigger system, not isolated campaigns. That means structured testing of angles, hooks, and creatives; tight control of audiences and budgets; and constant feedback loops with landing page and email/SMS performance so we can scale winners and cut losers quickly."
+                      },
+                      {
+                        q: "Do you build our landing pages and funnels for us?",
+                        a: "Yes. We design and build high-converting landing pages and funnels that match your brand and offers. This includes wireframing, copy, design direction, and implementation in the tools you use (e.g., Webflow, ClickFunnels, or custom setups), plus ongoing A/B testing on headlines, offers, and layouts."
+                      },
+                      {
+                        q: "What do you handle around CRM and follow ups?",
+                        a: "We help you set up or refine your CRM so leads are captured, routed, and followed up with automatically. That includes pipeline stages, automations, and basic reporting so you always know where deals are, what your close rates look like, and where revenue is being left on the table."
+                      },
+                      {
+                        q: "How deep do you go with email marketing and automation?",
+                        a: "We build and optimize full email ecosystems: welcome flows, post-purchase sequences, reactivation campaigns, launch campaigns, and behavior-based automations. We write the strategy and flows, draft or guide the copy, and run ongoing testing on subject lines, sends, and segments to consistently lift revenue per subscriber."
+                      },
+                      {
+                        q: "What about SMS automation and compliance?",
+                        a: "We set up SMS journeys for high-intent, timely touchpoints like abandon cart, lead follow up, and limited-time offers. We work within the rules of your SMS platform and region, ensure proper consent flows, and keep messages short, valuable, and aligned with your brand so they feel like a helpful nudge, not spam."
+                      },
+                      {
+                        q: "Who is a good fit to work with Apex Labs?",
+                        a: "Our best partners are brands already generating consistent revenue and investing in ads, but who know their funnel and follow ups aren’t fully dialed in. Typically they are spending at least $25k per month on paid traffic and want a partner to own social, paid ads, funnels, and follow ups as a single growth system."
+                      },
+                      {
+                        q: "What happens after I submit the application form?",
+                        a: "Within 2–3 business days, our team reviews your answers and current setup. If there’s a strong fit, we’ll invite you to a strategy call where we walk through your numbers, show you where we see the biggest opportunities across ads, funnels, and follow ups, and outline what an engagement with Apex Labs would look like."
+                      }
+                    ].map((item, idx) => (
+                      <details
+                        key={idx}
+                        className="group py-4"
+                      >
+                        <summary className="flex items-center justify-between cursor-pointer list-none">
+                          <span className="font-medium text-base md:text-lg text-[#FFFFFF]">
+                            {item.q}
+                          </span>
+                          <span className="ml-4 text-[#C8A96A] text-xl leading-none group-open:rotate-45 transition-transform">
+                            +
+                          </span>
+                        </summary>
+                        <p className="mt-3 text-sm md:text-base text-[#A3B1C6] leading-relaxed max-w-3xl">
+                          {item.a}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
         </main>
 
         {/* Footer */}
