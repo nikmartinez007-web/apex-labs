@@ -239,27 +239,8 @@ function PrivacyPolicyModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
   );
 }
 
-function CookieConsent({ openPrivacyPolicy }: { openPrivacyPolicy: () => void }) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const consent = localStorage.getItem('apex_labs_cookie_consent');
-    if (!consent) {
-      setIsVisible(true);
-    }
-  }, []);
-
+function CookieConsent({ isVisible, onAccept, onDecline, openPrivacyPolicy }: { isVisible: boolean, onAccept: () => void, onDecline: () => void, openPrivacyPolicy: () => void }) {
   if (!isVisible) return null;
-
-  const accept = () => {
-    localStorage.setItem('apex_labs_cookie_consent', 'true');
-    setIsVisible(false);
-  };
-
-  const decline = () => {
-    localStorage.setItem('apex_labs_cookie_consent', 'false');
-    setIsVisible(false);
-  };
 
   return (
     <div className="fixed bottom-0 left-0 w-full z-50 p-4 md:p-6 bg-[#0B1D2A] border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
@@ -269,10 +250,10 @@ function CookieConsent({ openPrivacyPolicy }: { openPrivacyPolicy: () => void })
           We use strictly necessary cookies to make our site work. We and our partners also use cookies and similar technologies to understand how our site is used, personalize content, and deliver targeted advertising. By clicking &quot;Accept All&quot;, you consent to our use of these cookies. Please review our <button type="button" onClick={openPrivacyPolicy} className="underline hover:text-[#FFFFFF]">Privacy Policy</button> to learn more about how we process your information.
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-          <button onClick={decline} className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] px-4 py-2 transition-colors">
+          <button onClick={onDecline} className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] px-4 py-2 transition-colors">
             Decline
           </button>
-          <button onClick={accept} className="font-medium text-sm bg-[#C8A96A] text-[#0B1D2A] hover:bg-[#B5985F] px-6 py-2.5 rounded-full transition-colors border border-[#C8A96A]">
+          <button onClick={onAccept} className="font-medium text-sm bg-[#C8A96A] text-[#0B1D2A] hover:bg-[#B5985F] px-6 py-2.5 rounded-full transition-colors border border-[#C8A96A]">
             Accept All
           </button>
         </div>
@@ -283,6 +264,7 @@ function CookieConsent({ openPrivacyPolicy }: { openPrivacyPolicy: () => void })
 
 export default function App() {
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+  const [showCookieConsent, setShowCookieConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [isQualified, setIsQualified] = useState(false);
@@ -290,6 +272,11 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Check initial cookie consent
+    if (!localStorage.getItem('apex_labs_cookie_consent')) {
+      setShowCookieConsent(true);
+    }
+
     // 2.5s for a high-end intro feel
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -1009,6 +996,7 @@ export default function App() {
             </div>
             <div className="flex gap-8">
               <button type="button" onClick={() => setIsPrivacyModalOpen(true)} className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Privacy Policy</button>
+              <button type="button" onClick={() => setShowCookieConsent(true)} className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Cookie Preferences</button>
               <a href="#" className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Terms of Service</a>
               <a href="#" className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Contact</a>
             </div>
@@ -1018,7 +1006,18 @@ export default function App() {
           </div>
         </footer>
       </motion.div>
-      <CookieConsent openPrivacyPolicy={() => setIsPrivacyModalOpen(true)} />
+      <CookieConsent
+        isVisible={showCookieConsent}
+        onAccept={() => {
+          localStorage.setItem('apex_labs_cookie_consent', 'true');
+          setShowCookieConsent(false);
+        }}
+        onDecline={() => {
+          localStorage.setItem('apex_labs_cookie_consent', 'false');
+          setShowCookieConsent(false);
+        }}
+        openPrivacyPolicy={() => setIsPrivacyModalOpen(true)}
+      />
       <PrivacyPolicyModal isOpen={isPrivacyModalOpen} onClose={() => setIsPrivacyModalOpen(false)} />
     </div>
   );
