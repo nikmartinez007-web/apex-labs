@@ -379,7 +379,6 @@ export default function App() {
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [isQualified, setIsQualified] = useState(false);
   const [qualifyMessage, setQualifyMessage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleHash = () => setRoute(window.location.hash || '#/');
@@ -390,12 +389,7 @@ export default function App() {
       setShowCookieConsent(true);
     }
 
-    // 2.5s for a high-end intro feel
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('hashchange', handleHash);
     };
   }, []);
@@ -483,40 +477,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0B1D2A] text-[#FFFFFF] font-sans selection:bg-[#C8A96A] selection:text-white overflow-hidden">
-
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <motion.div
-            key="loader"
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#C8A96A]"
-            initial={{ opacity: 1 }}
-            exit={{
-              opacity: 0,
-              scale: 1.05,
-              transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] }
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full flex items-center justify-center"
-            >
-              {/* Logo removed */}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 20 : 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-      >  {/* Ambient Background Glow */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#C8A96A] opacity-20 blur-[120px] rounded-full mix-blend-screen"></div>
-        </div>
-
+      >
         {/* Navigation */}
         <nav className="relative z-10 bg-[#C8A96A] sticky top-0 shadow-lg">
           <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative">
@@ -544,7 +509,7 @@ export default function App() {
 
             {/* Middle: Logo */}
             <div className="flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <a href="#/" onClick={() => setIsMobileMenuOpen(false)} className="font-extrabold text-2xl text-[#0B1D2A] tracking-tighter">APEX</a>
+              <a href="#/" onClick={() => setIsMobileMenuOpen(false)} className="font-extrabold text-2xl text-[#0B1D2A] tracking-tighter">Apex Labs</a>
             </div>
 
             {/* Right: Empty to balance flex */}
