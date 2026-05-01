@@ -328,15 +328,7 @@ export default function App() {
               transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
               className="w-full h-full flex items-center justify-center"
             >
-              <img
-                src="/apex-labs-logo.png"
-                alt="Apex Labs logo"
-                className="w-full h-full object-contain relative z-10 mix-blend-screen"
-                style={{
-                  maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)',
-                  WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)'
-                }}
-              />
+              {/* Logo removed */}
             </motion.div>
           </motion.div>
         )}
@@ -364,11 +356,7 @@ export default function App() {
 
             {/* Middle: Logo */}
             <div className="flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <img
-                src="/apex-labs-logo.png"
-                alt="Apex Labs logo"
-                className="h-10 md:h-12 lg:h-14 w-auto object-contain mix-blend-screen"
-              />
+              {/* Logo removed */}
             </div>
 
             {/* Right: Empty to balance flex */}
