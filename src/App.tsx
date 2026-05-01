@@ -483,7 +483,7 @@ export default function App() {
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         {/* Navigation */}
-        <nav className="relative z-10 bg-[#C8A96A] sticky top-0 shadow-lg">
+        <nav className="relative z-50 bg-[#C8A96A] sticky top-0 shadow-lg">
           <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative">
 
             {/* Hamburger Button (Mobile Only) */}
