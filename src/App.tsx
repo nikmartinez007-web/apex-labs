@@ -372,6 +372,7 @@ function ArticleView({ hash }: { hash: string }) {
 
 export default function App() {
   const [route, setRoute] = useState(window.location.hash || '#/');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [showCookieConsent, setShowCookieConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -520,17 +521,30 @@ export default function App() {
         <nav className="relative z-10 bg-[#C8A96A] sticky top-0 shadow-lg">
           <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative">
 
-            {/* Left: Links */}
+            {/* Hamburger Button (Mobile Only) */}
+            <div className="md:hidden flex items-center">
+              <button aria-label="Toggle Navigation" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-[#0B1D2A] p-2 focus:outline-none">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {isMobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+
+            {/* Left: Links (Desktop) */}
             <div className="hidden md:flex items-center gap-8 flex-1">
-              <a href="#/blog" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">Blog</a>
-              <a href="#problem" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">The Problem</a>
-              <a href="#system" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">Our System</a>
-              <a href="#results" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">Results</a>
+              <a href="#/blog" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">Blog</a>
+              <a href="#problem" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">The Problem</a>
+              <a href="#system" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">Our System</a>
+              <a href="#results" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">Results</a>
             </div>
 
             {/* Middle: Logo */}
             <div className="flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              {/* Logo removed */}
+              <a href="#/" onClick={() => setIsMobileMenuOpen(false)} className="font-extrabold text-2xl text-[#0B1D2A] tracking-tighter">APEX</a>
             </div>
 
             {/* Right: Empty to balance flex */}
@@ -538,6 +552,16 @@ export default function App() {
             </div>
 
           </div>
+
+          {/* Mobile Menu Dropdown */}
+          {isMobileMenuOpen && (
+            <div className="absolute top-20 left-0 w-full bg-[#C8A96A] shadow-2xl md:hidden flex flex-col py-6 px-6 gap-6 border-t border-[#0B1D2A]/10">
+              <a href="#/blog" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">Blog</a>
+              <a href="#problem" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">The Problem</a>
+              <a href="#system" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">Our System</a>
+              <a href="#results" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">Results</a>
+            </div>
+          )}
         </nav>
 
         <main className="relative z-10">
