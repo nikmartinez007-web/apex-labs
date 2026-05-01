@@ -10,8 +10,8 @@ html {
 }
 
 body {
-  background-color: #0F1115;
-  color: #E8E8E8;
+  background-color: #0B1D2A;
+  color: #FFFFFF;
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -22,14 +22,14 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0F1115;
+  background: #0B1D2A;
 }
 ::-webkit-scrollbar-thumb {
   background: #2A2D35;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7A1C24;
+  background: #C8A96A;
 }
 
 /* 3D Flip Helpers */

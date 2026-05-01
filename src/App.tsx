@@ -55,7 +55,7 @@ function CaseStudyCard({ number, title, description, metrics }: {
         >
           {/* Front Face (Hidden State) */}
           <div
-            className="absolute inset-0 backface-hidden bg-[#0F1115] border border-white/10 p-6 md:p-10 rounded-[2.5rem] flex flex-col items-center justify-center text-center overflow-hidden shadow-2xl"
+            className="absolute inset-0 backface-hidden bg-[#0B1D2A] border border-white/10 p-6 md:p-10 rounded-[2.5rem] flex flex-col items-center justify-center text-center overflow-hidden shadow-2xl"
             style={{ transform: 'translateZ(1px)' }}
           >
 
@@ -65,32 +65,32 @@ function CaseStudyCard({ number, title, description, metrics }: {
             </div>
 
 
-            <div className="font-bold text-xs text-[#C6A85A] mb-8 uppercase tracking-[0.3em] opacity-80">{number}</div>
+            <div className="font-bold text-xs text-[#C8A96A] mb-8 uppercase tracking-[0.3em] opacity-80">{number}</div>
 
             <div className="relative mb-8">
-              <div className="absolute inset-0 bg-[#7A1C24] blur-[40px] opacity-20 animate-pulse"></div>
-              <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#1A1D25] to-[#0F1115] border border-white/5 flex items-center justify-center relative z-10">
-                <Lock size={32} className="text-[#7A1C24]/80" />
+              <div className="absolute inset-0 bg-[#C8A96A] blur-[40px] opacity-20 animate-pulse"></div>
+              <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#112C41] to-[#0B1D2A] border border-white/5 flex items-center justify-center relative z-10">
+                <Lock size={32} className="text-[#C8A96A]/80" />
               </div>
             </div>
 
-            <h3 className="font-semibold text-lg md:text-xl text-[#E8E8E8] mb-2">Internal Performance Data</h3>
-            <p className="font-medium text-[10px] md:text-xs text-[#8A8F98] uppercase tracking-widest flex items-center gap-2 opacity-60">
+            <h3 className="font-semibold text-lg md:text-xl text-[#FFFFFF] mb-2">Internal Performance Data</h3>
+            <p className="font-medium text-[10px] md:text-xs text-[#A3B1C6] uppercase tracking-widest flex items-center gap-2 opacity-60">
               <Eye size={12} className="md:w-[14px] md:h-[14px]" /> Hover to unlock access
             </p>
 
 
             <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end opacity-20">
-              <div className="h-16 w-1 bg-gradient-to-t from-[#7A1C24] to-transparent rounded-full"></div>
-              <div className="h-10 w-1 bg-gradient-to-t from-[#C6A85A] to-transparent rounded-full"></div>
-              <div className="h-20 w-1 bg-gradient-to-t from-[#7A1C24] to-transparent rounded-full"></div>
-              <div className="h-12 w-1 bg-gradient-to-t from-[#C6A85A] to-transparent rounded-full"></div>
+              <div className="h-16 w-1 bg-gradient-to-t from-[#C8A96A] to-transparent rounded-full"></div>
+              <div className="h-10 w-1 bg-gradient-to-t from-[#C8A96A] to-transparent rounded-full"></div>
+              <div className="h-20 w-1 bg-gradient-to-t from-[#C8A96A] to-transparent rounded-full"></div>
+              <div className="h-12 w-1 bg-gradient-to-t from-[#C8A96A] to-transparent rounded-full"></div>
             </div>
           </div>
 
           {/* Back Face (Actual Content) */}
           <div
-            className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#12141A] to-[#0F1115] border border-[#7A1C24]/30 p-6 md:p-10 rounded-[2.5rem] flex flex-col justify-center overflow-hidden shadow-[0_0_50px_rgba(122,28,36,0.2)]"
+            className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#081521] to-[#0B1D2A] border border-[#C8A96A]/30 p-6 md:p-10 rounded-[2.5rem] flex flex-col justify-center overflow-hidden shadow-[0_0_50px_rgba(122,28,36,0.2)]"
             style={{ transform: 'rotateY(180deg) translateZ(1px)' }}
           >
 
@@ -101,19 +101,19 @@ function CaseStudyCard({ number, title, description, metrics }: {
             </div>
 
 
-            <div className="font-bold text-[10px] md:text-xs text-[#C6A85A] mb-2 md:mb-4 uppercase tracking-[0.3em]">{number}</div>
+            <div className="font-bold text-[10px] md:text-xs text-[#C8A96A] mb-2 md:mb-4 uppercase tracking-[0.3em]">{number}</div>
             <h3 className="font-bold text-2xl md:text-3xl mb-2 md:mb-4 text-white leading-tight">{title}</h3>
-            <p className="font-normal text-[#8A8F98] mb-6 md:mb-10 leading-relaxed text-base md:text-lg">{description}</p>
+            <p className="font-normal text-[#A3B1C6] mb-6 md:mb-10 leading-relaxed text-base md:text-lg">{description}</p>
 
 
             <div className="flex flex-wrap items-center gap-4 mt-auto">
               {metrics.map((m, i) => (
                 <div
                   key={i}
-                  className={`${m.isPrimary ? 'bg-[#7A1C24]/20 border border-[#7A1C24]/30' : 'bg-white/5 border border-white/5'} px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl flex flex-col gap-0.5 md:gap-1`}
+                  className={`${m.isPrimary ? 'bg-[#C8A96A]/20 border border-[#C8A96A]/30' : 'bg-white/5 border border-white/5'} px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl flex flex-col gap-0.5 md:gap-1`}
                 >
-                  <span className={`font-bold ${m.isPrimary ? 'text-xl md:text-2xl text-[#E8E8E8]' : 'text-lg md:text-xl text-[#E8E8E8]'}`}>{m.value}</span>
-                  <span className="text-[8px] md:text-[10px] uppercase tracking-[0.15em] text-[#C6A85A] font-semibold">{m.label}</span>
+                  <span className={`font-bold ${m.isPrimary ? 'text-xl md:text-2xl text-[#FFFFFF]' : 'text-lg md:text-xl text-[#FFFFFF]'}`}>{m.value}</span>
+                  <span className="text-[8px] md:text-[10px] uppercase tracking-[0.15em] text-[#C8A96A] font-semibold">{m.label}</span>
                 </div>
 
               ))}
@@ -184,22 +184,22 @@ function BookingSection() {
 
 
   return (
-    <section id="book" className="py-24 px-6 bg-[#0B0C10]/50 relative overflow-hidden">
+    <section id="book" className="py-24 px-6 bg-[#060F17]/50 relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#7A1C24] opacity-10 blur-[100px] rounded-full mix-blend-screen pointer-events-none"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#C8A96A] opacity-10 blur-[100px] rounded-full mix-blend-screen pointer-events-none"></div>
 
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <div className="font-bold text-xs text-[#C6A85A] mb-4 uppercase tracking-[0.3em]">Next Steps</div>
+          <div className="font-bold text-xs text-[#C8A96A] mb-4 uppercase tracking-[0.3em]">Next Steps</div>
           <h2 className="font-bold text-4xl md:text-6xl mb-6">
-            Book your <span className="text-[#7A1C24]">Strategy Call</span>
+            Book your <span className="text-[#C8A96A]">Strategy Call</span>
           </h2>
-          <p className="font-normal text-lg text-[#8A8F98] max-w-2xl mx-auto leading-relaxed">
+          <p className="font-normal text-lg text-[#A3B1C6] max-w-2xl mx-auto leading-relaxed">
             Choose a time that works for you to discuss your growth goals with our engineering team and explore how Apex Labs can scale your revenue.
           </p>
         </div>
 
-        <div className="bg-[#0F1115] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl min-h-[900px] md:min-h-[700px] md:h-[750px] relative group transition-all duration-500 hover:border-[#7A1C24]/30">
+        <div className="bg-[#0B1D2A] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl min-h-[900px] md:min-h-[700px] md:h-[750px] relative group transition-all duration-500 hover:border-[#C8A96A]/30">
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(122,28,36,0.1),transparent)]"></div>
           </div>
@@ -308,13 +308,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F1115] text-[#E8E8E8] font-sans selection:bg-[#7A1C24] selection:text-white overflow-hidden">
+    <div className="min-h-screen bg-[#0B1D2A] text-[#FFFFFF] font-sans selection:bg-[#C8A96A] selection:text-white overflow-hidden">
 
       <AnimatePresence mode="wait">
         {isLoading && (
           <motion.div
             key="loader"
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#7A1C24]"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#C8A96A]"
             initial={{ opacity: 1 }}
             exit={{
               opacity: 0,
@@ -348,18 +348,18 @@ export default function App() {
         transition={{ duration: 0.8, delay: 0.2 }}
       >  {/* Ambient Background Glow */}
         <div className="fixed inset-0 z-0 pointer-events-none">
-          <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#7A1C24] opacity-20 blur-[120px] rounded-full mix-blend-screen"></div>
+          <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#C8A96A] opacity-20 blur-[120px] rounded-full mix-blend-screen"></div>
         </div>
 
         {/* Navigation */}
-        <nav className="relative z-10 bg-[#7A1C24] sticky top-0 shadow-lg">
+        <nav className="relative z-10 bg-[#C8A96A] sticky top-0 shadow-lg">
           <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative">
 
             {/* Left: Links */}
             <div className="hidden md:flex items-center gap-8 flex-1">
-              <a href="#problem" className="font-medium text-sm text-[#E8E8E8]/90 hover:text-[#C6A85A] transition-colors">The Problem</a>
-              <a href="#system" className="font-medium text-sm text-[#E8E8E8]/90 hover:text-[#C6A85A] transition-colors">Our System</a>
-              <a href="#results" className="font-medium text-sm text-[#E8E8E8]/90 hover:text-[#C6A85A] transition-colors">Results</a>
+              <a href="#problem" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">The Problem</a>
+              <a href="#system" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">Our System</a>
+              <a href="#results" className="font-medium text-sm text-[#FFFFFF]/90 hover:text-[#C8A96A] transition-colors">Results</a>
             </div>
 
             {/* Middle: Logo */}
@@ -387,33 +387,33 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7A1C24]/10 border border-[#7A1C24]/30 text-[#C6A85A] font-medium text-sm mb-8">
-                <span className="w-2 h-2 rounded-full bg-[#7A1C24] animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C8A96A]/10 border border-[#C8A96A]/30 text-[#C8A96A] font-medium text-sm mb-8">
+                <span className="w-2 h-2 rounded-full bg-[#C8A96A] animate-pulse"></span>
                 Accepting new partners for Q3
               </div>
 
               <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl tracking-tight mb-8 leading-[1.1]">
                 Stop Scaling Noise.<br />
-                Start Scaling <span className="text-[#7A1C24] relative inline-block">
+                Start Scaling <span className="text-[#C8A96A] relative inline-block">
                   Revenue.
-                  <span className="absolute -bottom-2 left-0 w-full h-1.5 bg-[#C6A85A] rounded-full opacity-80"></span>
+                  <span className="absolute -bottom-2 left-0 w-full h-1.5 bg-[#C8A96A] rounded-full opacity-80"></span>
                 </span>
               </h1>
 
-              <p className="font-normal text-lg md:text-xl text-[#8A8F98] max-w-2xl mx-auto mb-12 leading-relaxed">
+              <p className="font-normal text-lg md:text-xl text-[#A3B1C6] max-w-2xl mx-auto mb-12 leading-relaxed">
                 We build engineered growth systems for global brands that demand measurable ROI, not just vanity metrics.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                   href="#apply"
-                  className="font-medium text-base bg-[#7A1C24] text-white px-8 py-4 rounded-full flex items-center gap-2 hover:bg-[#8f212a] transition-all border border-[#7A1C24] hover:border-[#C6A85A]/50 shadow-[0_0_30px_rgba(122,28,36,0.3)]"
+                  className="font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.3)]"
                 >
                   Apply for Partnership <ArrowRight size={18} />
                 </a>
                 <a
                   href="#results"
-                  className="font-medium text-base bg-transparent text-[#E8E8E8] px-8 py-4 rounded-full flex items-center gap-2 hover:bg-white/5 transition-all border border-white/10"
+                  className="font-medium text-base bg-transparent text-[#FFFFFF] px-8 py-4 rounded-full flex items-center gap-2 hover:bg-white/5 transition-all border border-white/10"
                 >
                   View Case Studies
                 </a>
@@ -431,23 +431,23 @@ export default function App() {
                 className="text-center mb-16"
               >
                 <h2 className="font-semibold text-3xl md:text-5xl mb-6">
-                  Why most brands <span className="text-[#7A1C24]">leak revenue</span>.
+                  Why most brands <span className="text-[#C8A96A]">leak revenue</span>.
                 </h2>
-                <p className="font-normal text-lg text-[#8A8F98] max-w-3xl mx-auto">
+                <p className="font-normal text-lg text-[#A3B1C6] max-w-3xl mx-auto">
                   Most brands run social, ads, and email as disconnected tactics. Agencies report on likes and ROAS, while broken funnels, weak follow ups, and messy CRMs quietly kill profit.
                 </p>
               </motion.div>
 
               <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div className="bg-[#0F1115] border border-white/5 p-8 rounded-3xl opacity-60 relative overflow-hidden group">
+                <div className="bg-[#0B1D2A] border border-white/5 p-8 rounded-3xl opacity-60 relative overflow-hidden group">
                   <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/12 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
                   </div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-[#8A8F98]">
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-[#A3B1C6]">
                       <BarChart3 size={20} />
                     </div>
-                    <h3 className="font-semibold text-xl text-[#8A8F98]">The Industry Standard</h3>
+                    <h3 className="font-semibold text-xl text-[#A3B1C6]">The Industry Standard</h3>
                   </div>
                   <ul className="space-y-4">
                     {[
@@ -456,7 +456,7 @@ export default function App() {
                       'Leads fall through the cracks with no CRM discipline',
                       'Follow ups stop after one or two touches'
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 font-normal text-[#8A8F98]">
+                      <li key={i} className="flex items-start gap-3 font-normal text-[#A3B1C6]">
                         <span className="mt-1 text-white/20">✕</span>
                         {item}
                       </li>
@@ -464,16 +464,16 @@ export default function App() {
                   </ul>
                 </div>
 
-                <div className="bg-gradient-to-b from-[#7A1C24]/10 to-transparent border border-[#7A1C24]/30 p-8 rounded-3xl relative overflow-hidden group">
+                <div className="bg-gradient-to-b from-[#C8A96A]/10 to-transparent border border-[#C8A96A]/30 p-8 rounded-3xl relative overflow-hidden group">
                   <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/18 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
                   </div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#C6A85A] opacity-5 blur-[50px]"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#C8A96A] opacity-5 blur-[50px]"></div>
                   <div className="flex items-center gap-3 mb-6 relative z-10">
-                    <div className="w-10 h-10 rounded-full bg-[#7A1C24] flex items-center justify-center text-white">
+                    <div className="w-10 h-10 rounded-full bg-[#C8A96A] flex items-center justify-center text-white">
                       <TrendingUp size={20} />
                     </div>
-                    <h3 className="font-semibold text-xl text-[#E8E8E8]">The Apex Standard</h3>
+                    <h3 className="font-semibold text-xl text-[#FFFFFF]">The Apex Standard</h3>
                   </div>
                   <ul className="space-y-4 relative z-10">
                     {[
@@ -482,8 +482,8 @@ export default function App() {
                       'CRM, email, and SMS automation that work together',
                       'Clear numbers on what it costs to acquire and retain a customer'
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 font-normal text-[#E8E8E8]">
-                        <CheckCircle2 className="mt-0.5 text-[#C6A85A] shrink-0" size={18} />
+                      <li key={i} className="flex items-start gap-3 font-normal text-[#FFFFFF]">
+                        <CheckCircle2 className="mt-0.5 text-[#C8A96A] shrink-0" size={18} />
                         {item}
                       </li>
                     ))}
@@ -498,9 +498,9 @@ export default function App() {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-20">
                 <h2 className="font-semibold text-3xl md:text-5xl mb-6">
-                  The Apex <span className="text-[#C6A85A]">Growth System</span>
+                  The Apex <span className="text-[#C8A96A]">Growth System</span>
                 </h2>
-                <p className="font-normal text-lg text-[#8A8F98] max-w-3xl mx-auto">
+                <p className="font-normal text-lg text-[#A3B1C6] max-w-3xl mx-auto">
                   We engineer full-funnel growth systems that combine social media management, paid ads, high-converting
                   landing pages and funnels, and automated follow ups across email, SMS, and CRM.
                 </p>
@@ -517,7 +517,7 @@ export default function App() {
                 ].map((service) => (
                   <span
                     key={service}
-                    className="inline-flex items-center rounded-full border border-[#C6A85A]/40 bg-[#151821] px-4 py-2 text-xs md:text-sm font-medium text-[#E8E8E8]/90 tracking-wide"
+                    className="inline-flex items-center rounded-full border border-[#C8A96A]/40 bg-[#0D2233] px-4 py-2 text-xs md:text-sm font-medium text-[#FFFFFF]/90 tracking-wide"
                   >
                     {service}
                   </span>
@@ -527,17 +527,17 @@ export default function App() {
               <div className="grid md:grid-cols-3 gap-8">
                 {[
                   {
-                    icon: <Target size={24} className="text-[#C6A85A]" />,
+                    icon: <Target size={24} className="text-[#C8A96A]" />,
                     title: "1. Paid Social & Ads Engine",
                     desc: "We manage your social media presence and run Meta and Google ads that drive qualified traffic into your funnel—not just impressions."
                   },
                   {
-                    icon: <Zap size={24} className="text-[#C6A85A]" />,
+                    icon: <Zap size={24} className="text-[#C8A96A]" />,
                     title: "2. Landing Pages & Funnels",
                     desc: "We design and optimize conversion-focused landing pages and funnels that turn cold clicks into booked calls and revenue."
                   },
                   {
-                    icon: <TrendingUp size={24} className="text-[#C6A85A]" />,
+                    icon: <TrendingUp size={24} className="text-[#C8A96A]" />,
                     title: "3. Follow Ups & Automation",
                     desc: "We build CRM, email, and SMS automation that nurtures, follows up, and recovers missed revenue without adding work to your team."
                   }
@@ -548,16 +548,16 @@ export default function App() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-[#0F1115] border border-white/10 p-8 rounded-3xl hover:border-[#C6A85A]/30 transition-colors relative overflow-hidden group"
+                    className="bg-[#0B1D2A] border border-white/10 p-8 rounded-3xl hover:border-[#C8A96A]/30 transition-colors relative overflow-hidden group"
                   >
                     <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/14 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
                     </div>
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#7A1C24]/20 transition-colors">
+                    <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#C8A96A]/20 transition-colors">
                       {step.icon}
                     </div>
-                    <h3 className="font-semibold text-xl mb-4 text-[#E8E8E8]">{step.title}</h3>
-                    <p className="font-normal text-[#8A8F98] leading-relaxed">
+                    <h3 className="font-semibold text-xl mb-4 text-[#FFFFFF]">{step.title}</h3>
+                    <p className="font-normal text-[#A3B1C6] leading-relaxed">
                       {step.desc}
                     </p>
                   </motion.div>
@@ -577,8 +577,8 @@ export default function App() {
                   { metric: "< 30", label: "Days to Profitability" }
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
-                    <div className="font-bold text-4xl md:text-5xl text-[#E8E8E8] mb-2">{stat.metric}</div>
-                    <div className="font-medium text-sm text-[#C6A85A] uppercase tracking-wider">{stat.label}</div>
+                    <div className="font-bold text-4xl md:text-5xl text-[#FFFFFF] mb-2">{stat.metric}</div>
+                    <div className="font-medium text-sm text-[#C8A96A] uppercase tracking-wider">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -608,13 +608,13 @@ export default function App() {
           </section>
 
           {/* Embedded Application Form */}
-          <section id="apply" className="py-24 px-6 bg-[#0F1115]">
+          <section id="apply" className="py-24 px-6 bg-[#0B1D2A]">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10">
                 <h2 className="font-semibold text-3xl md:text-4xl mb-4">
-                  Apply to work with <span className="text-[#C6A85A]">Apex Labs</span>
+                  Apply to work with <span className="text-[#C8A96A]">Apex Labs</span>
                 </h2>
-                <p className="font-normal text-lg text-[#8A8F98]">
+                <p className="font-normal text-lg text-[#A3B1C6]">
                   First, answer a few quick questions so we can confirm you&apos;re a fit for our partnership model.
                 </p>
               </div>
@@ -622,17 +622,17 @@ export default function App() {
               {!isQualified && (
                 <form
                   onSubmit={handleQualifySubmit}
-                  className="mb-10 bg-[#0B0C10] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6"
+                  className="mb-10 bg-[#060F17] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6"
                 >
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">
+                      <label className="font-medium text-sm text-[#FFFFFF]">
                         What is your current monthly ad spend?
                       </label>
                       <select
                         name="qualAdSpend"
                         required
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       >
                         <option value="">Select range</option>
                         <option value="under-800">Under $800 / month</option>
@@ -642,13 +642,13 @@ export default function App() {
                       </select>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">
+                      <label className="font-medium text-sm text-[#FFFFFF]">
                         What is your current monthly revenue?
                       </label>
                       <select
                         name="qualRevenue"
                         required
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       >
                         <option value="">Select range</option>
                         <option value="under-25k">Under $25k / month</option>
@@ -660,17 +660,17 @@ export default function App() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">
+                      <label className="font-medium text-sm text-[#FFFFFF]">
                         Have you tried social media or paid ads before?
                       </label>
-                      <div className="flex gap-4 text-sm text-[#E8E8E8]">
+                      <div className="flex gap-4 text-sm text-[#FFFFFF]">
                         <label className="inline-flex items-center gap-2">
                           <input
                             type="radio"
                             name="qualTried"
                             value="yes"
                             required
-                            className="h-4 w-4 rounded border-white/20 bg-[#14161C] text-[#C6A85A] focus:ring-[#C6A85A]"
+                            className="h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
                           />
                           Yes
                         </label>
@@ -679,20 +679,20 @@ export default function App() {
                             type="radio"
                             name="qualTried"
                             value="no"
-                            className="h-4 w-4 rounded border-white/20 bg-[#14161C] text-[#C6A85A] focus:ring-[#C6A85A]"
+                            className="h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
                           />
                           No
                         </label>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">
+                      <label className="font-medium text-sm text-[#FFFFFF]">
                         What is your primary growth goal right now?
                       </label>
                       <select
                         name="qualGoal"
                         required
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       >
                         <option value="">Select goal</option>
                         <option value="scale-profitably">Scale revenue profitably</option>
@@ -705,13 +705,13 @@ export default function App() {
 
                   <button
                     type="submit"
-                    className="w-full font-medium text-base bg-[#7A1C24] text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#8f212a] transition-all border border-[#7A1C24] hover:border-[#C6A85A]/50 shadow-[0_0_30px_rgba(122,28,36,0.4)]"
+                    className="w-full font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.4)]"
                   >
                     Check if we&apos;re a fit
                   </button>
 
                   {qualifyMessage && (
-                    <p className="mt-3 text-sm text-center text-[#8A8F98]">
+                    <p className="mt-3 text-sm text-center text-[#A3B1C6]">
                       {qualifyMessage}
                     </p>
                   )}
@@ -721,65 +721,65 @@ export default function App() {
               {isQualified && (
                 <form
                   onSubmit={handleApplySubmit}
-                  className="bg-[#0B0C10] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6 shadow-[0_0_40px_rgba(0,0,0,0.6)] relative overflow-hidden group"
+                  className="bg-[#060F17] border border-white/10 rounded-3xl p-8 md:p-10 space-y-6 shadow-[0_0_40px_rgba(0,0,0,0.6)] relative overflow-hidden group"
                 >
                   <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute -inset-y-16 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/8 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-[260%] transition-transform duration-700"></div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">Full Name</label>
+                      <label className="font-medium text-sm text-[#FFFFFF]">Full Name</label>
                       <input
                         type="text"
                         name="fullName"
                         required
                         placeholder="Jane Doe"
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">Work Email</label>
+                      <label className="font-medium text-sm text-[#FFFFFF]">Work Email</label>
                       <input
                         type="email"
                         name="email"
                         required
                         placeholder="you@company.com"
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">Brand / Company</label>
+                      <label className="font-medium text-sm text-[#FFFFFF]">Brand / Company</label>
                       <input
                         type="text"
                         name="company"
                         required
                         placeholder="Apex Labs"
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">Website URL</label>
+                      <label className="font-medium text-sm text-[#FFFFFF]">Website URL</label>
                       <input
                         type="url"
                         name="website"
                         placeholder="https://yourbrand.com"
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">
+                      <label className="font-medium text-sm text-[#FFFFFF]">
                         Monthly Ad Spend (USD)
                       </label>
                       <select
                         required
                         name="adSpend"
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       >
                         <option value="">Select range</option>
                         <option value="under-25k">Under $25k</option>
@@ -789,13 +789,13 @@ export default function App() {
                       </select>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="font-medium text-sm text-[#E8E8E8]">
+                      <label className="font-medium text-sm text-[#FFFFFF]">
                         Primary Growth Goal
                       </label>
                       <select
                         required
                         name="goal"
-                        className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                        className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                       >
                         <option value="">Select goal</option>
                         <option value="scale-profitably">Scale revenue profitably</option>
@@ -807,24 +807,24 @@ export default function App() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="font-medium text-sm text-[#E8E8E8]">
+                    <label className="font-medium text-sm text-[#FFFFFF]">
                       What does success look like in the next 6–12 months?
                     </label>
                     <textarea
                       rows={4}
                       placeholder="Share targets, constraints, and any context our team should know."
                       name="successWindow"
-                      className="bg-[#14161C] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#E8E8E8] resize-none focus:outline-none focus:border-[#C6A85A] focus:ring-1 focus:ring-[#C6A85A]/60"
+                      className="bg-[#0D2233] border border-white/10 rounded-xl px-4 py-3 text-sm text-[#FFFFFF] resize-none focus:outline-none focus:border-[#C8A96A] focus:ring-1 focus:ring-[#C8A96A]/60"
                     />
                   </div>
 
-                  <div className="flex items-start gap-3 text-sm text-[#8A8F98]">
+                  <div className="flex items-start gap-3 text-sm text-[#A3B1C6]">
                     <input
                       id="accept-terms"
                       type="checkbox"
                       required
                       name="acceptTerms"
-                      className="mt-1 h-4 w-4 rounded border-white/20 bg-[#14161C] text-[#C6A85A] focus:ring-[#C6A85A]"
+                      className="mt-1 h-4 w-4 rounded border-white/20 bg-[#0D2233] text-[#C8A96A] focus:ring-[#C8A96A]"
                     />
                     <label htmlFor="accept-terms">
                       I agree to be contacted by Apex Labs regarding this application and confirm I have read the
@@ -835,12 +835,12 @@ export default function App() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full font-medium text-base bg-[#7A1C24] text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#8f212a] transition-all border border-[#7A1C24] hover:border-[#C6A85A]/50 shadow-[0_0_30px_rgba(122,28,36,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full font-medium text-base bg-[#C8A96A] text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B5985F] transition-all border border-[#C8A96A] hover:border-[#C8A96A]/50 shadow-[0_0_30px_rgba(122,28,36,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? 'Submitting…' : 'Submit Application'}
                   </button>
                   {submitMessage && (
-                    <p className="mt-3 text-sm text-center text-[#8A8F98]">
+                    <p className="mt-3 text-sm text-center text-[#A3B1C6]">
                       {submitMessage}
                     </p>
                   )}
@@ -855,12 +855,12 @@ export default function App() {
 
           <section className="py-32 px-6">
             <div className="max-w-5xl mx-auto">
-              <div className="bg-[#7A1C24] border-2 border-[#C6A85A] rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden shadow-[0_0_50px_rgba(198,168,90,0.15)]">
+              <div className="bg-[#C8A96A] border-2 border-[#C8A96A] rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden shadow-[0_0_50px_rgba(198,168,90,0.15)]">
                 {/* Decorative elements */}
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 to-transparent pointer-events-none"></div>
 
                 <div className="relative z-10">
-                  <h2 className="font-semibold text-4xl md:text-6xl text-[#E8E8E8] mb-6 tracking-tight">
+                  <h2 className="font-semibold text-4xl md:text-6xl text-[#FFFFFF] mb-6 tracking-tight">
                     Ready to engineer your growth?
                   </h2>
                   <p className="font-normal text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10">
@@ -868,7 +868,7 @@ export default function App() {
                   </p>
                   <a
                     href="#apply"
-                    className="font-medium text-base bg-[#0F1115] text-[#C6A85A] px-10 py-5 rounded-full inline-flex items-center gap-2 hover:bg-black transition-all shadow-xl hover:scale-105 active:scale-95"
+                    className="font-medium text-base bg-[#0B1D2A] text-[#C8A96A] px-10 py-5 rounded-full inline-flex items-center gap-2 hover:bg-black transition-all shadow-xl hover:scale-105 active:scale-95"
                   >
                     Apply For Partnership <ArrowRight size={18} />
                   </a>
@@ -878,9 +878,9 @@ export default function App() {
           </section>
 
           {/* FAQ Section */}
-          <section id="faq" className="py-24 px-6 bg-[#0F1115] border-t border-white/5">
+          <section id="faq" className="py-24 px-6 bg-[#0B1D2A] border-t border-white/5">
             <div className="max-w-5xl mx-auto">
-              <h2 className="font-semibold text-3xl md:text-4xl mb-8 text-[#E8E8E8]">
+              <h2 className="font-semibold text-3xl md:text-4xl mb-8 text-[#FFFFFF]">
                 FAQ: Common questions about partnering with Apex Labs
               </h2>
 
@@ -924,14 +924,14 @@ export default function App() {
                     className="group py-4"
                   >
                     <summary className="flex items-center justify-between cursor-pointer list-none">
-                      <span className="font-medium text-base md:text-lg text-[#E8E8E8]">
+                      <span className="font-medium text-base md:text-lg text-[#FFFFFF]">
                         {item.q}
                       </span>
-                      <span className="ml-4 text-[#C6A85A] text-xl leading-none group-open:rotate-45 transition-transform">
+                      <span className="ml-4 text-[#C8A96A] text-xl leading-none group-open:rotate-45 transition-transform">
                         +
                       </span>
                     </summary>
-                    <p className="mt-3 text-sm md:text-base text-[#8A8F98] leading-relaxed max-w-3xl">
+                    <p className="mt-3 text-sm md:text-base text-[#A3B1C6] leading-relaxed max-w-3xl">
                       {item.a}
                     </p>
                   </details>
@@ -943,7 +943,7 @@ export default function App() {
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-white/5 bg-[#0F1115] py-12 px-6 relative z-10">
+        <footer className="border-t border-white/5 bg-[#0B1D2A] py-12 px-6 relative z-10">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center justify-center gap-3">
               <img
@@ -953,11 +953,11 @@ export default function App() {
               />
             </div>
             <div className="flex gap-8">
-              <a href="#" className="font-medium text-sm text-[#8A8F98] hover:text-[#E8E8E8] transition-colors">Privacy Policy</a>
-              <a href="#" className="font-medium text-sm text-[#8A8F98] hover:text-[#E8E8E8] transition-colors">Terms of Service</a>
-              <a href="#" className="font-medium text-sm text-[#8A8F98] hover:text-[#E8E8E8] transition-colors">Contact</a>
+              <a href="#" className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Privacy Policy</a>
+              <a href="#" className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Terms of Service</a>
+              <a href="#" className="font-medium text-sm text-[#A3B1C6] hover:text-[#FFFFFF] transition-colors">Contact</a>
             </div>
-            <div className="font-normal text-sm text-[#8A8F98]">
+            <div className="font-normal text-sm text-[#A3B1C6]">
               © {new Date().getFullYear()} Apex Labs. All rights reserved.
             </div>
           </div>
