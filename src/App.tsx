@@ -11,6 +11,7 @@ import {
   Lock,
   Eye
 } from 'lucide-react';
+import Offers from './Offers';
 
 function CaseStudyCard({ number, title, description, metrics }: {
   number: string,
@@ -502,6 +503,7 @@ export default function App() {
             {/* Left: Links (Desktop) */}
             <div className="hidden md:flex items-center gap-8 flex-1">
               <a href="#/blog" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">Blog</a>
+              <a href="#/offers" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">Offers</a>
               <a href="#problem" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">The Problem</a>
               <a href="#system" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">Our System</a>
               <a href="#results" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-sm text-[#0B1D2A]/80 hover:text-[#0B1D2A] transition-colors uppercase tracking-wider">Results</a>
@@ -522,6 +524,7 @@ export default function App() {
           {isMobileMenuOpen && (
             <div className="absolute top-20 left-0 w-full bg-[#C8A96A] shadow-2xl md:hidden flex flex-col py-6 px-6 gap-6 border-t border-[#0B1D2A]/10">
               <a href="#/blog" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">Blog</a>
+              <a href="#/offers" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">Offers</a>
               <a href="#problem" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">The Problem</a>
               <a href="#system" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">Our System</a>
               <a href="#results" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-lg text-[#0B1D2A] hover:opacity-70 transition-colors uppercase tracking-wider">Results</a>
@@ -530,7 +533,7 @@ export default function App() {
         </nav>
 
         <main className="relative z-10">
-          {route === '#/blog' ? <BlogList /> : route.startsWith('#/blog/') ? <ArticleView hash={route} /> : (
+          {route === '#/offers' ? <Offers /> : route === '#/blog' ? <BlogList /> : route.startsWith('#/blog/') ? <ArticleView hash={route} /> : (
             <>
               {/* Hero Section */}
               <section className="pt-32 pb-24 px-6 max-w-7xl mx-auto text-center">

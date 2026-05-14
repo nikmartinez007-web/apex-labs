@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Growth Systems — Service Offers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:    #0a1e2c;
+  --navy2:   #0f2d3c;
+  --navy3:   #0a1520;
+  --gold:    #f0c369;
+  --gold2:   #e1a83a;
+  --gold3:   #fad98a;
+  --cream:   #f5f0e4;
+  --mist:    #c8bfa8;
+  --ink:     #0a0a0a;
+  --white:   #ffffff;
+  --purple:  #28153c;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy3);
+  color: var(--cream);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── COVER PAGE ─── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem 4rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy3) 0%, var(--navy2) 60%, var(--purple) 100%);
+  border-bottom: 1px solid rgba(240,195,105,0.2);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,195,105,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo-icon::before {
+  content: 'AP';
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+.logo-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mist);
+  line-height: 1.4;
+}
+
+.cover-date {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--mist);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.cover-main {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 0 2rem;
+}
+
+.cover-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cover-eyebrow::before {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: var(--gold);
+  display: block;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 1.0;
+  color: var(--cream);
+  max-width: 14ch;
+  margin-bottom: 0.5rem;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.cover-sub {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mist);
+  opacity: 0.7;
+  margin-top: 1.5rem;
+  max-width: 50ch;
+}
+
+.cover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 1;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(240,195,105,0.15);
+}
+
+.cover-stat {
+  text-align: center;
+}
+
+.cover-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+
+.cover-stat-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mist);
+  opacity: 0.6;
+  margin-top: 0.25rem;
+}
+
+/* ─── SECTION ─── */
+.section {
+  padding: 5rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section + .section {
+  border-top: 1px solid rgba(240,195,105,0.1);
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.section-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+.section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(240,195,105,0.3), transparent);
+}
+
+/* ─── PRICING MODEL INTRO ─── */
+.pricing-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.pricing-model {
+  background: rgba(240,195,105,0.04);
+  border: 1px solid rgba(240,195,105,0.15);
+  padding: 2.5rem;
+  position: relative;
+}
+
+.pricing-model.highlighted {
+  background: rgba(240,195,105,0.08);
+  border-color: rgba(240,195,105,0.4);
+}
+
+.pricing-model.highlighted::before {
+  content: 'RECOMMENDED';
+  position: absolute;
+  top: -1px;
+  right: 2rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  background: var(--gold);
+  color: var(--navy3);
+  padding: 0.2rem 0.75rem;
+  font-weight: 700;
+}
+
+.model-name {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.model-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.model-price span {
+  font-size: 1rem;
+  color: var(--mist);
+}
+
+.model-desc {
+  font-size: 0.85rem;
+  color: var(--mist);
+  line-height: 1.7;
+  margin-top: 1rem;
+}
+
+/* ─── PACKAGES ─── */
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+  background: rgba(240,195,105,0.1);
+  border: 1px solid rgba(240,195,105,0.1);
+}
+
+.package {
+  background: var(--navy3);
+  padding: 2.5rem 2rem;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.package:hover { background: rgba(15, 45, 60, 0.8); }
+
+.package.premium {
+  background: linear-gradient(160deg, var(--navy2) 0%, var(--purple) 100%);
+  grid-column: span 2;
+}
+
+.package.premium:hover {
+  background: linear-gradient(160deg, rgba(15,45,60,0.9) 0%, rgba(40,21,60,0.9) 100%);
+}
+
+.pkg-badge {
+  display: inline-block;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.75rem;
+  border: 1px solid;
+  margin-bottom: 1.5rem;
+}
+
+.pkg-badge.entry { border-color: var(--mist); color: var(--mist); }
+.pkg-badge.core { border-color: var(--gold2); color: var(--gold2); }
+.pkg-badge.growth { border-color: var(--gold); color: var(--gold); }
+.pkg-badge.ai { border-color: #7eb8d4; color: #7eb8d4; }
+.pkg-badge.premium-badge { border-color: var(--gold3); color: var(--gold3); background: rgba(240,195,105,0.08); }
+
+.pkg-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.pkg-tagline {
+  font-size: 0.75rem;
+  color: var(--mist);
+  opacity: 0.7;
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+
+.pkg-price {
+  margin-bottom: 2rem;
+}
+
+.pkg-price-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.pkg-price-period {
+  font-size: 0.7rem;
+  color: var(--mist);
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+}
+
+.pkg-price-perf {
+  margin-top: 0.5rem;
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--gold3);
+  background: rgba(240,195,105,0.08);
+  border: 1px solid rgba(240,195,105,0.2);
+  padding: 0.2rem 0.6rem;
+}
+
+.pkg-divider {
+  height: 1px;
+  background: rgba(240,195,105,0.12);
+  margin-bottom: 1.5rem;
+}
+
+.pkg-includes {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mist);
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}
+
+.pkg-features {
+  list-style: none;
+}
+
+.pkg-features li {
+  font-size: 0.82rem;
+  color: var(--mist);
+  padding: 0.4rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  line-height: 1.4;
+}
+
+.pkg-features li:last-child { border-bottom: none; }
+
+.pkg-features li::before {
+  content: '—';
+  color: var(--gold);
+  opacity: 0.5;
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  margin-top: 0.1rem;
+}
+
+.pkg-setup {
+  margin-top: 1.5rem;
+  font-size: 0.72rem;
+  color: var(--mist);
+  opacity: 0.6;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(240,195,105,0.08);
+}
+
+.pkg-setup strong { color: var(--gold); opacity: 1; }
+
+/* ─── ADD-ONS ─── */
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(240,195,105,0.08);
+}
+
+.addon {
+  background: var(--navy3);
+  padding: 1.75rem 1.5rem;
+  transition: background 0.2s;
+}
+
+.addon:hover { background: rgba(15,45,60,0.6); }
+
+.addon-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  opacity: 0.8;
+}
+
+.addon-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+.addon-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  font-weight: 300;
+}
+
+.addon-period {
+  font-size: 0.65rem;
+  color: var(--mist);
+  opacity: 0.5;
+}
+
+.addon-desc {
+  font-size: 0.75rem;
+  color: var(--mist);
+  opacity: 0.6;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+/* ─── PERFORMANCE MODEL ─── */
+.perf-section {
+  background: linear-gradient(135deg, var(--navy2), var(--purple));
+  border: 1px solid rgba(240,195,105,0.2);
+  padding: 4rem;
+  margin-bottom: 3rem;
+}
+
+.perf-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+
+.perf-title em { font-style: italic; color: var(--gold); }
+
+.perf-desc {
+  font-size: 0.88rem;
+  color: var(--mist);
+  max-width: 55ch;
+  margin-bottom: 3rem;
+  line-height: 1.8;
+}
+
+.perf-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.perf-table th {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(240,195,105,0.2);
+}
+
+.perf-table td {
+  padding: 1.1rem 1.25rem;
+  font-size: 0.88rem;
+  color: var(--mist);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  vertical-align: middle;
+}
+
+.perf-table tr:last-child td { border-bottom: none; }
+
+.perf-table .highlight td {
+  background: rgba(240,195,105,0.06);
+  color: var(--cream);
+}
+
+.perf-table .total-row td {
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-top: 1px solid rgba(240,195,105,0.3);
+  border-bottom: none;
+}
+
+.tag-pill {
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid rgba(240,195,105,0.3);
+  color: var(--gold3);
+  background: rgba(240,195,105,0.06);
+}
+
+/* ─── REVENUE MILESTONES ─── */
+.milestones {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  border: 1px solid rgba(240,195,105,0.1);
+  overflow: hidden;
+}
+
+.milestone {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid rgba(240,195,105,0.1);
+  position: relative;
+}
+
+.milestone:last-child { border-right: none; }
+
+.milestone::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s, width 0.3s;
+  width: 0;
+}
+
+.milestone:hover::before { opacity: 1; width: 100%; }
+
+.ms-month {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mist);
+  opacity: 0.5;
+  margin-bottom: 0.5rem;
+}
+
+.ms-revenue {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.ms-clients {
+  font-size: 0.7rem;
+  color: var(--mist);
+  opacity: 0.6;
+}
+
+.ms-label {
+  font-size: 0.7rem;
+  color: var(--cream);
+  margin-top: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ─── TRACKING SECTION ─── */
+.tracking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.track-card {
+  border: 1px solid rgba(240,195,105,0.12);
+  padding: 2.5rem;
+}
+
+.track-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+
+.track-card p {
+  font-size: 0.82rem;
+  color: var(--mist);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.track-list {
+  list-style: none;
+}
+
+.track-list li {
+  font-size: 0.82rem;
+  color: var(--mist);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  gap: 0.75rem;
+}
+
+.track-list li::before {
+  content: '✓';
+  color: var(--gold);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* ─── CTA ─── */
+.cta-section {
+  background: linear-gradient(135deg, var(--navy2), var(--purple));
+  padding: 5rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(240,195,105,0.15);
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 80vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,195,105,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title em { font-style: italic; color: var(--gold); }
+
+.cta-desc {
+  font-size: 0.88rem;
+  color: var(--mist);
+  opacity: 0.7;
+  max-width: 45ch;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+}
+
+.cta-contact {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cta-contact-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mist);
+  opacity: 0.5;
+}
+
+.cta-contact-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(240,195,105,0.1);
+}
+
+footer p {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mist);
+  opacity: 0.4;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.cover-main { animation: fadeIn 0.8s ease both; }
+.cover-bottom { animation: fadeIn 0.8s 0.3s ease both; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .cover, .section, .perf-section, .cta-section { padding: 2.5rem 1.5rem; }
+  .packages-grid { grid-template-columns: 1fr; }
+  .package.premium { grid-column: span 1; }
+  .addons-grid { grid-template-columns: repeat(2, 1fr); }
+  .milestones { grid-template-columns: repeat(3, 1fr); }
+  .pricing-intro { grid-template-columns: 1fr; }
+  .tracking-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="logo-mark">
+      <div class="logo-icon"></div>
+      <div class="logo-text">AP Growth<br>Systems</div>
+    </div>
+    <div class="cover-date">Service Offer Document · 2026</div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-eyebrow">Complete Client Acquisition System</div>
+    <h1>Build the<br><em>Revenue Machine</em><br>Your Business Deserves</h1>
+    <p class="cover-sub">Paid Ads · AI Lead Generation · Automation · Full-Funnel Systems<br>for Med Spas · Dentists · Construction</p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-stat">
+      <span class="cover-stat-num">€2,500</span>
+      <div class="cover-stat-label">Base Retainer</div>
+    </div>
+    <div class="cover-stat">
+      <span class="cover-stat-num">+10%</span>
+      <div class="cover-stat-label">New Revenue Share</div>
+    </div>
+    <div class="cover-stat">
+      <span class="cover-stat-num">25</span>
+      <div class="cover-stat-label">Clients to €100K/mo</div>
+    </div>
+    <div class="cover-stat">
+      <span class="cover-stat-num">6</span>
+      <div class="cover-stat-label">Person Team</div>
+    </div>
+    <div class="cover-stat">
+      <span class="cover-stat-num">12mo</span>
+      <div class="cover-stat-label">To Scale</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING MODEL -->
+<div class="section">
+  <div class="section-label">
+    <span class="section-num">01</span>
+    <span class="section-title">Pricing Model</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="pricing-intro">
+    <div class="pricing-model">
+      <div class="model-name">Option A — Flat Retainer</div>
+      <div class="model-price">€2,500 <span>/ month</span></div>
+      <div class="model-desc">Fixed monthly fee. Predictable for the client, predictable for you. Best for new clients who need to see results before performance-sharing feels comfortable. Entry point to the relationship.</div>
+    </div>
+    <div class="pricing-model highlighted">
+      <div class="model-name">Option B — Performance Retainer</div>
+      <div class="model-price">€2,500 <span>+ 10%</span></div>
+      <div class="model-desc">€2,500 base retainer plus 10% of all new revenue generated through tracked channels. Aligns your incentives completely with the client's growth. Higher upside for both parties. This is the model that scales to €100K/month.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PACKAGES -->
+<div class="section">
+  <div class="section-label">
+    <span class="section-num">02</span>
+    <span class="section-title">Service Packages</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="packages-grid">
+
+    <div class="package">
+      <div class="pkg-badge entry">Entry · Months 1–2</div>
+      <div class="pkg-name">Starter<br>Lead Engine</div>
+      <div class="pkg-tagline">Your first offer. Simple to deliver, fast to show results. Close at case study rate.</div>
+      <div class="pkg-price">
+        <div class="pkg-price-main">€2,500</div>
+        <div class="pkg-price-period">/ month base</div>
+        <div class="pkg-price-perf">+ 10% new revenue</div>
+      </div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-includes">What's included</div>
+      <ul class="pkg-features">
+        <li>Meta Ads Management (under €5k ad spend)</li>
+        <li>Standard landing page (built once)</li>
+        <li>CRM setup via GoHighLevel</li>
+        <li>AI follow-up automation sequence</li>
+        <li>Monthly performance report</li>
+      </ul>
+      <div class="pkg-setup"><strong>+€1,000–€1,500</strong> one-time setup fee</div>
+    </div>
+
+    <div class="package">
+      <div class="pkg-badge core">Core · Months 2–4</div>
+      <div class="pkg-name">Authority<br>Builder</div>
+      <div class="pkg-tagline">Full-price offer once you have your first case study. Closes the skeptical prospect.</div>
+      <div class="pkg-price">
+        <div class="pkg-price-main">€3,500</div>
+        <div class="pkg-price-period">– €4,700 / month</div>
+        <div class="pkg-price-perf">+ 10% new revenue</div>
+      </div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-includes">What's included</div>
+      <ul class="pkg-features">
+        <li>Meta + Google Ads Management</li>
+        <li>Advanced conversion landing page</li>
+        <li>CRM setup &amp; pipeline management</li>
+        <li>Monthly strategy call</li>
+        <li>Ad copy testing (20+ variations)</li>
+      </ul>
+      <div class="pkg-setup"><strong>+€1,500</strong> one-time setup fee</div>
+    </div>
+
+    <div class="package">
+      <div class="pkg-badge growth">Growth · Months 4–6</div>
+      <div class="pkg-name">Growth<br>Engine</div>
+      <div class="pkg-tagline">The upsell that takes happy clients from good to exceptional. Full funnel activation.</div>
+      <div class="pkg-price">
+        <div class="pkg-price-main">€6,500</div>
+        <div class="pkg-price-period">– €7,700 / month</div>
+        <div class="pkg-price-perf">+ 10% new revenue</div>
+      </div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-includes">What's included</div>
+      <ul class="pkg-features">
+        <li>Meta + Google Ads (€5k–€15k spend)</li>
+        <li>Full sales funnel build</li>
+        <li>CRM + pipeline setup</li>
+        <li>Email automation sequences</li>
+        <li>SMS follow-up automation</li>
+        <li>Monthly consulting</li>
+      </ul>
+      <div class="pkg-setup"><strong>+€2,000</strong> one-time setup fee</div>
+    </div>
+
+    <div class="package">
+      <div class="pkg-badge ai">AI · Months 6–12</div>
+      <div class="pkg-name">AI Lead<br>Engine</div>
+      <div class="pkg-tagline">Outbound at scale. AI finds, enriches, and books prospects automatically 24/7.</div>
+      <div class="pkg-price">
+        <div class="pkg-price-main">€8,500</div>
+        <div class="pkg-price-period">/ month</div>
+        <div class="pkg-price-perf">+ 10% new revenue</div>
+      </div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-includes">What's included</div>
+      <ul class="pkg-features">
+        <li>AI lead scraping &amp; prospect identification</li>
+        <li>Lead data enrichment system</li>
+        <li>AI cold email outreach automation</li>
+        <li>AI LinkedIn outreach campaigns</li>
+        <li>AI appointment booking system</li>
+        <li>Ongoing system management</li>
+      </ul>
+      <div class="pkg-setup"><strong>+€2,000</strong> setup fee</div>
+    </div>
+
+    <div class="package premium">
+      <div class="pkg-badge premium-badge">Premium · Month 12+</div>
+      <div class="pkg-name">Hybrid Growth System</div>
+      <div class="pkg-tagline">The complete infrastructure. Every channel, every automation, every system working together as one machine. Reserved for established businesses ready to scale aggressively.</div>
+      <div class="pkg-price">
+        <div class="pkg-price-main">€9,000</div>
+        <div class="pkg-price-period">/ month + €4,500 build fee</div>
+        <div class="pkg-price-perf">+ 10% new revenue generated</div>
+      </div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-includes">Everything included</div>
+      <ul class="pkg-features" style="columns:2; column-gap:2rem;">
+        <li>Meta + Google Ads Management</li>
+        <li>Full sales funnel system</li>
+        <li>CRM + pipeline automation</li>
+        <li>Email + SMS automation</li>
+        <li>AI lead scraping system</li>
+        <li>AI outreach &amp; cold email</li>
+        <li>AI appointment booking</li>
+        <li>Bi-weekly consulting calls</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ADD-ONS -->
+<div class="section">
+  <div class="section-label">
+    <span class="section-num">03</span>
+    <span class="section-title">Add-On Services</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="addons-grid">
+    <div class="addon">
+      <span class="addon-icon">🔍</span>
+      <div class="addon-name">AI Competitor Audit</div>
+      <div class="addon-price">€1,500 <span class="addon-period">– €2,500</span></div>
+      <div class="addon-desc">One-time deep competitor analysis. Positioning gaps, ad angles, funnel weaknesses.</div>
+    </div>
+    <div class="addon">
+      <span class="addon-icon">📄</span>
+      <div class="addon-name">Landing Page</div>
+      <div class="addon-price">€1,500 <span class="addon-period">– €2,000</span></div>
+      <div class="addon-desc">High-converting landing page with AI-written copy and conversion architecture.</div>
+    </div>
+    <div class="addon">
+      <span class="addon-icon">✉️</span>
+      <div class="addon-name">Email Automation</div>
+      <div class="addon-price">€1,400 <span class="addon-period">/ month</span></div>
+      <div class="addon-desc">Full email marketing management. Sequences, campaigns, list management.</div>
+    </div>
+    <div class="addon">
+      <span class="addon-icon">📱</span>
+      <div class="addon-name">SMS Automation</div>
+      <div class="addon-price">€1,500 <span class="addon-period">setup</span></div>
+      <div class="addon-desc">SMS follow-up automation. Speed-to-lead sequences that book appointments instantly.</div>
+    </div>
+    <div class="addon">
+      <span class="addon-icon">🎯</span>
+      <div class="addon-name">Extra Ad Creative</div>
+      <div class="addon-price">€300 <span class="addon-period">– €500/mo</span></div>
+      <div class="addon-desc">Additional monthly ad copy and creative packages. 20–50 new variations.</div>
+    </div>
+    <div class="addon">
+      <span class="addon-icon">🧠</span>
+      <div class="addon-name">Strategy Session</div>
+      <div class="addon-price">€1,500 <span class="addon-period">one-time</span></div>
+      <div class="addon-desc">Deep-dive growth strategy call. Full audit + 90-day roadmap delivered.</div>
+    </div>
+    <div class="addon">
+      <span class="addon-icon">📊</span>
+      <div class="addon-name">CRM Full Setup</div>
+      <div class="addon-price">€2,000 <span class="addon-period">one-time</span></div>
+      <div class="addon-desc">Complete GoHighLevel buildout. Pipelines, automations, integrations, team training.</div>
+    </div>
+    <div class="addon">
+      <span class="addon-icon">📅</span>
+      <div class="addon-name">Monthly Consulting</div>
+      <div class="addon-price">€2,000 <span class="addon-period">/ month</span></div>
+      <div class="addon-desc">Ongoing strategic advisory. Weekly check-ins, optimization reviews, growth planning.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PERFORMANCE MODEL -->
+<div class="section">
+  <div class="section-label">
+    <span class="section-num">04</span>
+    <span class="section-title">Performance Revenue Model</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="perf-section">
+    <div class="perf-title">What the <em>10% model</em> looks like in practice</div>
+    <p class="perf-desc">The performance retainer is designed to align your success with your client's success. Below is a realistic projection of monthly billings across different performance scenarios — for a med spa, dental practice, or contractor client.</p>
+
+    <table class="perf-table">
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>New Patients / Leads</th>
+          <th>Avg. Revenue / Client</th>
+          <th>New Revenue Generated</th>
+          <th>Base Fee</th>
+          <th>10% Perf. Fee</th>
+          <th>Total Billing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag-pill">Slow Month</span></td>
+          <td>10 new patients</td>
+          <td>€800</td>
+          <td>€8,000</td>
+          <td>€2,500</td>
+          <td>€800</td>
+          <td>€3,300</td>
+        </tr>
+        <tr class="highlight">
+          <td><span class="tag-pill">Normal Month</span></td>
+          <td>25 new patients</td>
+          <td>€1,000</td>
+          <td>€25,000</td>
+          <td>€2,500</td>
+          <td>€2,500</td>
+          <td>€5,000</td>
+        </tr>
+        <tr>
+          <td><span class="tag-pill">Strong Month</span></td>
+          <td>40 new patients</td>
+          <td>€1,200</td>
+          <td>€48,000</td>
+          <td>€2,500</td>
+          <td>€4,800</td>
+          <td>€7,300</td>
+        </tr>
+        <tr class="highlight">
+          <td><span class="tag-pill">Exceptional</span></td>
+          <td>50 new patients</td>
+          <td>€1,500</td>
+          <td>€75,000</td>
+          <td>€2,500</td>
+          <td>€7,500</td>
+          <td>€10,000</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="5">25 clients × avg €5,500/month</td>
+          <td colspan="2">→ €137,500/month revenue</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TRACKING -->
+  <div class="tracking-grid">
+    <div class="track-card">
+      <h3>How We Track New Revenue</h3>
+      <p>Performance fees only apply to revenue that can be directly attributed to our campaigns — no guesswork, no disputes.</p>
+      <ul class="track-list">
+        <li>Dedicated tracking links and landing pages per campaign</li>
+        <li>Booking software integration (Jane App, Mindbody, Cliniko)</li>
+        <li>CRM lead source tagging from first touch</li>
+        <li>Monthly reconciliation report with client sign-off</li>
+        <li>"New revenue" defined as first-visit or first-transaction only</li>
+      </ul>
+    </div>
+    <div class="track-card">
+      <h3>Client Protections Built In</h3>
+      <p>Clients sign with confidence because the structure is transparent and capped where needed.</p>
+      <ul class="track-list">
+        <li>Optional performance fee cap at 3× base (€7,500 max) for new clients</li>
+        <li>30-day written notice to exit — no lock-in after month 3</li>
+        <li>Full campaign asset ownership transferred to client</li>
+        <li>Weekly spend reports — no surprise ad costs</li>
+        <li>Separate billing for base vs. performance — full transparency</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- REVENUE MILESTONES -->
+<div class="section">
+  <div class="section-label">
+    <span class="section-num">05</span>
+    <span class="section-title">Agency Revenue Roadmap</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="milestones">
+    <div class="milestone">
+      <div class="ms-month">Month 1–2</div>
+      <div class="ms-revenue">€2–5K</div>
+      <div class="ms-clients">1–2 clients</div>
+      <div class="ms-label">First Revenue</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-month">Month 3–4</div>
+      <div class="ms-revenue">€10–16K</div>
+      <div class="ms-clients">3–4 clients</div>
+      <div class="ms-label">Real Traction</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-month">Month 5–6</div>
+      <div class="ms-revenue">€25–35K</div>
+      <div class="ms-clients">6–8 clients</div>
+      <div class="ms-label">First Hire</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-month">Month 7–9</div>
+      <div class="ms-revenue">€50–70K</div>
+      <div class="ms-clients">12–15 clients</div>
+      <div class="ms-label">Scaling</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-month">Month 10–12</div>
+      <div class="ms-revenue">€80–110K</div>
+      <div class="ms-clients">20–25 clients</div>
+      <div class="ms-label">Target Zone</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-month">Month 18–24</div>
+      <div class="ms-revenue">€130–150K</div>
+      <div class="ms-clients">25–30 clients</div>
+      <div class="ms-label">Empire Mode</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-eyebrow">Ready to Build?</div>
+  <div class="cta-title">Let's build your<br><em>complete revenue machine</em></div>
+  <p class="cta-desc">We don't run ads. We build client acquisition systems that generate leads, book appointments, and drive predictable revenue — automatically.</p>
+  <div class="cta-contact">
+    <div class="cta-contact-label">Get in touch</div>
+    <div class="cta-contact-value">AP Growth Systems</div>
+  </div>
+</div>
+
+<footer>
+  <p>AP Growth Systems · Confidential Service Offer · 2026</p>
+  <p>Paid Ads · AI Lead Generation · Automation · Full-Funnel</p>
+  <p>Med Spas · Dentists · Construction</p>
+</footer>
+
+</body>
+</html>
